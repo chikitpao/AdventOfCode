@@ -1,4 +1,4 @@
-""" Advent of Code 20??, Day ??
+""" Advent of Code 2015, Day 2
     Author: Chi-Kit Pao
 """
 
