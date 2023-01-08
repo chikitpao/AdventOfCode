@@ -49,7 +49,6 @@ def main():
 
     print('Question 1: Number of characters for string literals minus number' \
         ' of characters in memory for string values?')
-    quiz = Quiz('input.txt')
     print(f'Answer: {quiz.run()}')
 
     print('Question 2: Number of characters for newly encoded strings minus ' \
