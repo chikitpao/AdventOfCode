@@ -38,7 +38,7 @@ def main():
     result *= factor
     result %= mod_value
 
-    print('Question:What code do you give the machine?')
+    print('Question: What code do you give the machine?')
     print(f'Answer: {result}')
     print(f'Time elapsed: {time.time() - start_time} s')
 
