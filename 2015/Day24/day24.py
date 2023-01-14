@@ -88,6 +88,7 @@ def main():
         'packages in the ideal configuration?')
     print(f'Answer: {quiz.find_configuration(4)}')
 
+    # Time elapsed: 73.63175106048584 s
     print(f'Time elapsed: {time.time() - start_time} s')
 
 
