@@ -12,9 +12,9 @@ Current results:
 \[2019\]    
 \[2018\]    
 \[2017\]    
-\[2016\] 10\*\
+\[2016\] 12\*\
 \[2015\] 50\*\
-Total stars: 110\* 
+Total stars: 112\* 
 
 License & Copyright
 -------------------
