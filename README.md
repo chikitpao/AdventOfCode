@@ -6,15 +6,15 @@ Own solutions for "Advent Of Code" (url: https://adventofcode.com)
 See Repository AdventOfCode2022 for solutions of year 2022.
 
 Current results:  
-\[2022\] 50 \*\
+\[2022\] 50\*\
 \[2021\]    
 \[2020\]    
 \[2019\]    
 \[2018\]    
 \[2017\]    
-\[2016\] 12\*\
+\[2016\] 14\*\
 \[2015\] 50\*\
-Total stars: 112\* 
+Total stars: 114\* 
 
 License & Copyright
 -------------------
