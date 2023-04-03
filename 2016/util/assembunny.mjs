@@ -5,7 +5,6 @@ class AssemBunny{
         this.currentLine = 0;
         this.buffer = new Array();
         this.check = null;
-        this.lineMap = new Map();
     }
     reset(){
         this.registers = { ['a']: 0, ['b']: 0, ['c']: 0, ['d']: 0};
@@ -27,12 +26,6 @@ class AssemBunny{
         if(!instruction){
             this.currentLine++;
             return false;
-        }
-        // TODO Remove debug code
-        if(this.lineMap.has(this.currentLine)){
-            this.lineMap.set(this.currentLine, this.lineMap.get(this.currentLine) + 1);
-        }else{
-            this.lineMap.set(this.currentLine, 1);
         }
         if(instruction.startsWith('cpy ')){
             let result = instruction.match(/cpy (?<src>((-?\d+)|a|b|c|d)) (?<dest>(a|b|c|d))/);
