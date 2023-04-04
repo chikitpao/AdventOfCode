@@ -14,9 +14,9 @@ Current results:
 | \[2019\] |  |  |
 | \[2018\] |  |  |
 | \[2017\] |  |  |  
-| \[2016\] | 27\* | JavaScript |
+| \[2016\] | 29\* | JavaScript |
 | \[2015\] | 50\* | Python |
-Total stars: 127\*
+Total stars: 129\*
 
 License & Copyright
 -------------------
