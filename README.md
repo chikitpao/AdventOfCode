@@ -3,18 +3,20 @@ Advent Of Code
 
 Own solutions for "Advent Of Code" (url: https://adventofcode.com)
 
-See Repository AdventOfCode2022 for solutions of year 2022.
+See Repository *AdventOfCode2022* for solutions of year 2022 (https://github.com/chikitpao/AdventOfCode2022).
 
-Current results:  
-\[2022\] 50\*\
-\[2021\]    
-\[2020\]    
-\[2019\]    
-\[2018\]    
-\[2017\]    
-\[2016\] 25\*\
-\[2015\] 50\*\
-Total stars: 125\* 
+Current results:
+| Year | Stars | Programming language |
+|------|------|----------------------|
+| \[2022\] | 50\* | Python |
+| \[2021\] |  |  |
+| \[2020\] |  |  |
+| \[2019\] |  |  |
+| \[2018\] |  |  |
+| \[2017\] |  |  |  
+| \[2016\] | 27\* | JavaScript |
+| \[2015\] | 50\* | Python |
+Total stars: 127\*
 
 License & Copyright
 -------------------
