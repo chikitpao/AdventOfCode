@@ -56,6 +56,7 @@ class CircularBuffer{
         if(this.isEmpty())
             return undefined;
         let result = this.data[this.start];
+        this.data[this.start] = null;
         this.start++;
         this.start %= this.capacity;
         this.full = false;

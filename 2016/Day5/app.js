@@ -29,7 +29,7 @@ async function getNodeJsCryptoModule() {
 
 function findPassword(start, doorId, createHash)
 {
-    let test_var = 1;
+    let test_var = 0;
     let password = '';
     while(true){
         let data = doorId + test_var.toString();
