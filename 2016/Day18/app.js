@@ -2,8 +2,6 @@
 
 ///// Author: Chi-Kit Pao
 
-import {CircularBuffer} from '../util/CircularBuffer.mjs';
-
 const inputUrl = 'input.txt'
 let isBrowser = true;
 if (typeof window === 'undefined') {
