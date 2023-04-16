@@ -11,7 +11,7 @@
 #include <vector>
 
 // Returns difference between min and max values.
-static int evaluateRowPart1(std::vector<int>& values)
+static int EvaluateRowPart1(std::vector<int>& values)
 {
 	if (values.size() <= 1)
 		return 0;
@@ -36,7 +36,7 @@ static int evaluateRowPart1(std::vector<int>& values)
 }
 
 // Returns quotient of two evenly divisible values
-static int evaluateRowPart2(std::vector<int>& values)
+static int EvaluateRowPart2(std::vector<int>& values)
 {
 	if (values.size() <= 1)
 		return 0;
@@ -73,8 +73,8 @@ int main()
 			token_ss >> value;
 			values.push_back(value);
 		}
-		checksum += evaluateRowPart1(values);
-		answer2 += evaluateRowPart2(values);
+		checksum += EvaluateRowPart1(values);
+		answer2 += EvaluateRowPart2(values);
 	}
 
 	std::cout << "Day 2: " << "\n";

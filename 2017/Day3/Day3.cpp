@@ -8,7 +8,7 @@
 #include <numeric>
 #include <utility>
 
-static int part1(int puzzleInput)
+static int Part1(int puzzleInput)
 {
 	int root = static_cast<int>(floor(sqrt(puzzleInput)));
 	if (root % 2 == 0) {
@@ -63,7 +63,7 @@ static int part1(int puzzleInput)
 	int steps = abs(x) + abs(y);
 }
 
-static int part2(int puzzleInput)
+static int Part2(int puzzleInput)
 {
 	std::map<std::pair<int, int>, int> memory;
 	memory.emplace(std::pair<int, int>(0, 0), 1);
@@ -129,8 +129,8 @@ static int part2(int puzzleInput)
 int main()
 {
 	const int puzzleInput = 265149; // 513^2 < 265149 < 515^2
-	int steps = part1(puzzleInput);
-	int answer2 = part2(puzzleInput);
+	int steps = Part1(puzzleInput);
+	int answer2 = Part2(puzzleInput);
 
 	std::cout << "Day 3: " << "\n";
 	std::cout << ("Question 1: How many steps are required to carry the data from the square identified in your puzzle input all the way to the access port?\n");
