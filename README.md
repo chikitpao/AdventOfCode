@@ -13,10 +13,10 @@ Current results:
 | \[2020\] |  |  |
 | \[2019\] |  |  |
 | \[2018\] |  |  |
-| \[2017\] | 16\* | C++ |  
+| \[2017\] | 18\* | C++ |  
 | \[2016\] | 50\* | JavaScript |
 | \[2015\] | 50\* | Python |
-Total stars: 166\*
+Total stars: 168\*
 
 License & Copyright
 -------------------
