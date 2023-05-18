@@ -12,11 +12,11 @@ Current results:
 | \[2021\] |  |  |
 | \[2020\] |  |  |
 | \[2019\] |  |  |
-| \[2018\] | 8\* | Java |
+| \[2018\] | 10\* | Java |
 | \[2017\] | 50\* | C++ |  
 | \[2016\] | 50\* | JavaScript |
 | \[2015\] | 50\* | Python |
-Total stars: 208\*
+Total stars: 210\*
 
 License & Copyright
 -------------------
