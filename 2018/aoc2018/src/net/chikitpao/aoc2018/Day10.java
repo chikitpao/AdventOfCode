@@ -146,6 +146,8 @@ public class Day10 {
         System.out.println("Answer: ");
         GetAnswer1(obj, lightPoints);
         // Answer 1: ERCXLAJL
+        System.out.println("Question 2: exactly how many seconds would they have needed to wait for that message to "
+                + "appear?");
         // Answer 2: 10813
     }
 }
