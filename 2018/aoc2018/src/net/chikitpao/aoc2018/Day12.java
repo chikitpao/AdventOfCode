@@ -166,7 +166,7 @@ public class Day12 {
         System.out.println("Question 1: After 20 generations, what is the sum of the numbers of all pots which "
                  + "contain a plant?");
         System.out.println("Answer: " + getAnswer1(cave));
-        System.out.println("Question 2: Question 2: After fifty billion (50000000000) generations, what is the sum "
+        System.out.println("Question 2: After fifty billion (50000000000) generations, what is the sum "
                 + "of the numbers of all pots which contain a plant?");
         System.out.println("Answer: " + getAnswer2(cave));
     }
