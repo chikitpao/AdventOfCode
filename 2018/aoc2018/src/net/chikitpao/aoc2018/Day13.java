@@ -1,5 +1,5 @@
-// Day12.java
-// AoC 2018 Day 12: Subterranean Sustainability
+// Day13.java
+// AoC 2018 Day 13: Mine Cart Madness
 // Author: Chi-Kit Pao
 //
 
