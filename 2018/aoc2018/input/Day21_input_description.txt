@@ -1,0 +1,36 @@
+seti 123 0 1_ => r[1] = 123 (0x7B)
+bani 1 456 1_ => r[1] &= 456 (0x1CB)
+eqri 1 72 1_ => r[1] = (r[1] == 72) ? 1 : 0 (72 == 0x48)
+addr 1 2 2_  => ip += r[1] (+1) => r[1] ? skip next instr : next instr
+seti 0 0 2_  => jump to 0 (+1)
+seti 0 4 1_  => r[1] = 0
+bori 1 65536 3_  => r[3] = r[1] | 65536 (0x10000) => r[3] = 65536 (0x10000)
+seti 10905776 4 1_  => r[1] = 10905776 (0xA667E8)
+bani 3 255 4_  => r[4] = r[3] & 255 (0xFF)
+addr 1 4 1_  => r[1] += r[4]
+bani 1 16777215 1_  => r[1] &= 16777215 (0xFFFFFF)
+muli 1 65899 1_  => r[1] *= 65899
+bani 1 16777215 1_  => r[1] &= 16777215 (0xFFFFFF)
+gtir 256 3 4_  => r[4] = (256 > r[3]) ? 1 : 0
+addr 4 2 2_  => r[4] ? skip next instr : next instr
+addi 2 1 2_  => skip next instruction
+seti 27 1 2_  => jump to 27 (+1)
+seti 0 6 4_  => r[4] = 0
+addi 4 1 5_  => r[5] = r[4] + 1
+muli 5 256 5_  => r[5] *= 256 (0x100)
+gtrr 5 3 5_  => r[5] = (r[5] > r[3]) ? 1 : 0
+addr 5 2 2_  => ip += r[5] (+1) => r[5] ? skip next instr : next instr
+addi 2 1 2_  => ip += 1 (+1) => => skip next instr
+seti 25 1 2_  => jump to 25 (+1) 
+addi 4 1 4_  => r[4]++
+seti 17 9 2_  => jump to 17 (+1)
+setr 4 7 3_  => r[3] = r[4]
+seti 7 4 2_  => jump to 7 (+1)
+eqrr 1 0 4_  =>  r[4] = (r[1] == r[0]) ? 1 : 0
+addr 4 2 2_  => ip += r[4] (+1) => r[4] ? skip next instr (exit program): next instr
+seti 5 1 2_  => jump to 5 (+1)
+
+REMARKS:
+- r[0] doesn't change.
+- line 30 exit program <= line 29 r[1] == r[0]
+

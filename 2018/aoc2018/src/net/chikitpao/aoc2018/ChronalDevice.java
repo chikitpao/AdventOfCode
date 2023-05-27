@@ -2,7 +2,7 @@
 // AoC 2018
 // Author: Chi-Kit Pao
 //
-// Used by Day16
+// Used by Day 16, Day 19 and Day 21
 
 package net.chikitpao.aoc2018;
 
@@ -15,6 +15,10 @@ import java.util.regex.Pattern;
 public class ChronalDevice {
     interface Operation {
         int execute(int[] vec3, int[] regs);
+    }
+    interface DebugInterface {
+        // true to continue execution, false else
+        boolean doBreak(int lineNumber, int registers[]);
     }
     public class Instruction{
         public ChronalDevice device;
@@ -40,10 +44,10 @@ public class ChronalDevice {
             this.arg3 = arg3;
         }
     }
-    // Day 16 needs 4 registers. Day 19 needs 6 registers.
+    // Day 16 needs 4 registers. Day 19 and Day 21 need 6 registers.
     public int[] registers = {0, 0, 0, 0, 0, 0};
-    public int ipRegister = -1;    // Instruction Pointer register index (Day 19)
-    private ArrayList<CodeLine> codeLines = new ArrayList<>();    // Code lines (Day 19)
+    public int ipRegister = -1;    // Instruction Pointer register index (Day 19 and Day 21)
+    private ArrayList<CodeLine> codeLines = new ArrayList<>();    // Code lines (Day 19 and Day 21)
     public ArrayList<Instruction> instructions = new ArrayList<>();
     public HashMap<String, Instruction> instructionsMap = new HashMap<>();
 
@@ -111,11 +115,16 @@ public class ChronalDevice {
     }
 
     public void run() {
+        run(null);
+    }
+    public void run(DebugInterface debugInterface) {
         while(true){
             int currentLine = registers[ipRegister];
             if(currentLine < 0 || currentLine >= codeLines.size())
                 return;
             CodeLine codeLine = codeLines.get(currentLine);
+            if((debugInterface != null) && !debugInterface.doBreak(currentLine, registers))
+                return;
             instructionsMap.get(codeLine.instr).execute(codeLine.arg3);
             registers[ipRegister]++;
         }

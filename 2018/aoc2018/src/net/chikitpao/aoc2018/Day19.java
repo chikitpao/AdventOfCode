@@ -1,4 +1,4 @@
-// Day1.java
+// Day19.java
 // AoC 2018 Day 19: Go With The Flow
 // Author: Chi-Kit Pao
 //
