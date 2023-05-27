@@ -13,6 +13,10 @@ public class Pos {
         this.y = y;
         this.x = x;
     }
+    public Pos(Pos other){
+        this.y = other.y;
+        this.x = other.x;
+    }
 
     @Override
     public boolean equals(Object obj) {
