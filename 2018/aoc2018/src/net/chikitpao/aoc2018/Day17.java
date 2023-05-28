@@ -98,7 +98,7 @@ public class Day17 {
             }
         }
 
-        public int getRemainignWaterCount() {
+        public int getRemainingWaterCount() {
             int count = 0;
             for(int i = 0; i < height; ++i) {
                 for(int j = 0; j < waterMap[i].length; ++j){
@@ -290,6 +290,6 @@ public class Day17 {
         System.out.println("Answer: " + reservoir.waterCount);
         System.out.println("Question 2: How many water tiles are left after the water spring stops producing water "
                 + "and all remaining water not at rest has drained?");
-        System.out.println("Answer: " + reservoir.getRemainignWaterCount());
+        System.out.println("Answer: " + reservoir.getRemainingWaterCount());
     }
 }
