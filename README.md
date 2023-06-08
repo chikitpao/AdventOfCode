@@ -12,11 +12,13 @@ Current results:
 | \[2021\] |  |  |
 | \[2020\] |  |  |
 | \[2019\] |  |  |
-| \[2018\] | 46\* | Java |
+| \[2018\] | 46\* | Java [1]|
 | \[2017\] | 50\* | C++ |  
 | \[2016\] | 50\* | JavaScript |
 | \[2015\] | 50\* | Python |
 Total stars: 246\*
+
+[1]: For part 2 of Day 23, I used Java to write a MPS file for input of COIN-OR Branch and Cut solver (CBC), and return values from the solution file.
 
 License & Copyright
 -------------------
