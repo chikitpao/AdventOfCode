@@ -131,7 +131,7 @@ public class Day23{
             long place = 1l;
             long mulitpleAfterPoint = 1000000000000l;
             for(; exp <= 12; exp++){
-                if(place * 10l >= absValue){
+                if(place * 10l > absValue){
                     value1 = absValue / place;
                     value2 = (exp == 0) ? 0 : ((absValue % place) * mulitpleAfterPoint);
                     break;
@@ -162,6 +162,12 @@ public class Day23{
             maxM = Math.max(maxM, Math.abs((long) axisExtrema.second));
         }
         maxM = 6l * (maxM + 1l);
+        // It seems that some maxM value will cause CBC to output wrong coordinates in spite of correct objective
+        // value. Try next higher power of two.
+        long tempMaxM = 1l;
+        while(tempMaxM < maxM)
+            tempMaxM *= 2;
+        maxM = tempMaxM;
 
         // Create column variables and fill coefficients
         final int BOT_COUNT = 1000;
@@ -252,9 +258,9 @@ public class Day23{
         //   1000 TOTALCOV             976                       1
         //   1001 X               47812313                      -0
         //   1002 Y               20634366                      -0
-        //   1003 Z               11715983                      -0
+        //   1003 Z               11715984                      -0
 
-        return Nanobot.getDistance3D(new int[]{47812313, 20634366, 11715983}, new int[]{0, 0, 0});
+        return Nanobot.getDistance3D(new int[]{47812313, 20634366, 11715984}, new int[]{0, 0, 0});
     }
     public static void main(String[] args) throws Exception {
         Day23 obj = new Day23();

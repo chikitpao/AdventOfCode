@@ -33,6 +33,12 @@ def main():
         maxM = max(maxM, abs(max(nanobots, key = lambda bot: bot.maxReachable[i]).maxReachable[i]))
         maxM = max(maxM, abs(min(nanobots, key = lambda bot: bot.minReachable[i]).minReachable[i]))
     maxM = 6 * (maxM + 1)
+    # It seems that some maxM value will cause CBC to output wrong coordinates in spite of correct 
+    # objective value. Try next higher power of two.
+    tempMaxM = 1
+    while tempMaxM < maxM:
+        tempMaxM *= 2
+    maxM = tempMaxM
 
     # Objective: find coordinate with maximum coverage
     problem = plp.LpProblem(f'FindMaxCoverage', plp.LpMaximize)
