@@ -15,9 +15,9 @@ calcFuel2 x
 
 main = do
     masses <- map read . lines <$> readFile "Day01_input.txt" :: IO [Integer]
+    putStrLn "Question 1: What is the sum of the fuel requirements for all of the modules on your spacecraft?"
     print $ sum (map calcFuel masses)
-    print $ calcFuel 1969
-    print $ calcFuel2 1969
+    putStrLn "Question 2: What is the sum of the fuel requirements for all of the modules on your spacecraft when also taking into account the mass of the added fuel?"
     print $ sum (map calcFuel2 masses)
 -- Answer1: 3368364
 -- Answer2: 5049684
