@@ -2,7 +2,6 @@
 -- AoC 2019 Day 4: Secure Container
 -- Author: Chi-Kit Pao
 
-inputLowerBound :: Int
 inputLowerBound = 347312
 inputUpperBound = 805915
 range = [inputLowerBound..inputUpperBound]
