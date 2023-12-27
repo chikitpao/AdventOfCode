@@ -5,9 +5,12 @@ Own solutions for "Advent Of Code" (url: https://adventofcode.com)
 
 See Repository *AdventOfCode2022* for solutions of year 2022 (https://github.com/chikitpao/AdventOfCode2022).
 
+See Repository *AdventOfCode2023* for solutions of year 2023 (https://github.com/chikitpao/AdventOfCode2023).
+
 Current results:
 | Year | Stars | Programming language |
 |------|------|----------------------|
+| \[2023\] | 50\* | Python |
 | \[2022\] | 50\* | Python |
 | \[2021\] |  |  |
 | \[2020\] |  |  |
@@ -16,7 +19,7 @@ Current results:
 | \[2017\] | 50\* | C++ |  
 | \[2016\] | 50\* | JavaScript |
 | \[2015\] | 50\* | Python |
-Total stars: 258\*
+Total stars: 308\*
 
 [1]: For part 2 of Day 23, I used Java to write a MPS file for input of COIN-OR Branch and Cut solver (CBC), and return values from the solution file.
 
