@@ -16,6 +16,8 @@ Day05.exe
 @REM  passing all the tests, what diagnostic code does the program
 @REM  produce?
 @REM 13547311
+@REM Question 2: What is the diagnostic code for system ID 5?
+@REM 236453
 
 @REM ghc --make Day07.hs
 @REM Day07.exe

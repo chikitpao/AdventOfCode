@@ -19,6 +19,11 @@ main = do
         case result1 of
             Nothing -> print "ERROR: Abnormal abortion"
             Just endProgram -> print $ fromJust $ get4th endProgram
+    putStrLn "Question 2: What is the diagnostic code for system ID 5?"
+    let result2 = runProgram program' 0 (Just 5) Nothing in
+        case result2 of
+            Nothing -> print "ERROR: Abnormal abortion"
+            Just endProgram -> print $ fromJust $ get4th endProgram
 
 -- Answer1: 13547311
--- Answer2: ...
+-- Answer2: 236453

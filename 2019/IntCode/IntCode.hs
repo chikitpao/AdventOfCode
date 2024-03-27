@@ -39,6 +39,10 @@ getOpcodeLength 1 = 4
 getOpcodeLength 2 = 4
 getOpcodeLength 3 = 2
 getOpcodeLength 4 = 2
+getOpcodeLength 5 = 3
+getOpcodeLength 6 = 3
+getOpcodeLength 7 = 4
+getOpcodeLength 8 = 4
 getOpcodeLength 99 = 1
 getOpcodeLength _ = 10000
 
@@ -114,5 +118,22 @@ runProgram program' line inputValue outputValue =
                 3 -> runProgram (replaceNth (fromJust (getOperandAddr' 1)) (fromJust inputValue) program') newLineValue inputValue outputValue
                 4 -> let operand1Value = getOperandValue' 1 in 
                     runProgram program' newLineValue inputValue operand1Value
-                -- 4 -> runProgram (replaceNth (fromJust (getOperandAddr' 1)) (fromJust (getOperandValue' 1)) program') newLineValue inputValue operand1Value
+                5 -> let operand1Value = fromJust (getOperandValue' 1) in
+                        if operand1Value /= 0 then
+                            runProgram program' (fromJust (getOperandValue' 2)) inputValue outputValue
+                        else
+                            runProgram program' newLineValue inputValue outputValue
+                6 -> let operand1Value = fromJust (getOperandValue' 1) in
+                        if operand1Value == 0 then
+                            runProgram program' (fromJust (getOperandValue' 2)) inputValue outputValue
+                        else
+                            runProgram program' newLineValue inputValue outputValue
+                7 -> let operand1Value = fromJust (getOperandValue' 1) 
+                         operand2Value = fromJust (getOperandValue' 2) 
+                         comparison = fromEnum (operand1Value < operand2Value) in
+                         runProgram (replaceNth (fromJust (getOperandAddr' 3)) comparison program') newLineValue inputValue outputValue
+                8 -> let operand1Value = fromJust (getOperandValue' 1) 
+                         operand2Value = fromJust (getOperandValue' 2) 
+                         comparison = fromEnum (operand1Value == operand2Value) in
+                         runProgram (replaceNth (fromJust (getOperandAddr' 3)) comparison program') newLineValue inputValue outputValue
                 _ -> Nothing
