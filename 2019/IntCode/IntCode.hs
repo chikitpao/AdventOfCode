@@ -97,7 +97,7 @@ test c opcode testOpcode mode program line outputValue
     | otherwise = show line ++ " " ++ show testOpcode ++ " " ++ helper opcode program line ++  " " ++ show outputValue ++ " " ++ show mode
 
 
-runProgram :: [Int] -> Int -> Maybe Int -> Maybe Int -> Maybe ([Int], Int, Maybe Int, Maybe Int)
+runProgram :: [Int] -> Int -> Maybe [Int] -> Maybe Int -> Maybe ([Int], Int, Maybe [Int], Maybe Int)
 runProgram program' line inputValue outputValue = 
     let tempOpcode = program' !! line
         mode = tempOpcode `div` 100
@@ -115,7 +115,12 @@ runProgram program' line inputValue outputValue =
             case opcode of
                 1 -> runProgram (replaceNth (fromJust (getOperandAddr' 3)) (fromJust (getOperandValue' 1) + fromJust (getOperandValue' 2)) program') newLineValue inputValue outputValue
                 2 -> runProgram (replaceNth (fromJust (getOperandAddr' 3)) (fromJust (getOperandValue' 1) * fromJust (getOperandValue' 2)) program') newLineValue inputValue outputValue
-                3 -> runProgram (replaceNth (fromJust (getOperandAddr' 1)) (fromJust inputValue) program') newLineValue inputValue outputValue
+                3 -> case inputValue of
+                        Nothing -> Nothing
+                        Just [] -> Nothing
+                        _ -> let h = head $ fromJust inputValue
+                                 t = tail $ fromJust inputValue in
+                                 runProgram (replaceNth (fromJust (getOperandAddr' 1)) h program') newLineValue (Just t) outputValue
                 4 -> let operand1Value = getOperandValue' 1 in 
                     runProgram program' newLineValue inputValue operand1Value
                 5 -> let operand1Value = fromJust (getOperandValue' 1) in

@@ -19,8 +19,12 @@ Day05.exe
 @REM Question 2: What is the diagnostic code for system ID 5?
 @REM 236453
 
-@REM ghc --make Day07.hs
-@REM Day07.exe
+ghc --make Day07.hs
+Day07.exe
+@REM Question 1: Try every combination of phase settings on the
+@REM  amplifiers. What is the highest signal that can be sent to the
+@REM  thrusters?
+@REM ([0,3,2,4,1],38500)
 
 @REM ghc --make Day09.hs
 @REM Day09.exe
