@@ -25,6 +25,10 @@ Day07.exe
 @REM  amplifiers. What is the highest signal that can be sent to the
 @REM  thrusters?
 @REM ([0,3,2,4,1],38500)
+@REM Question 2: Try every combination of the new phase settings on
+@REM  the amplifier feedback loop. What is the highest signal that
+@REM  can be sent to the thrusters?
+@REM ([7,5,9,6,8],33660560)
 
 @REM ghc --make Day09.hs
 @REM Day09.exe

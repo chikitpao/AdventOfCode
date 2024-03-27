@@ -12,7 +12,8 @@ get1st,
 get2nd,
 get3rd,
 get4th,
-runProgram
+runProgram,
+runProgram2,
 )
 where
 
@@ -96,9 +97,8 @@ test c opcode testOpcode mode program line outputValue
     | opcode == 99 = show line ++ " " ++ show testOpcode ++ "[] " ++ c ++ " " ++ show outputValue ++ " " ++ show mode
     | otherwise = show line ++ " " ++ show testOpcode ++ " " ++ helper opcode program line ++  " " ++ show outputValue ++ " " ++ show mode
 
-
-runProgram :: [Int] -> Int -> Maybe [Int] -> Maybe Int -> Maybe ([Int], Int, Maybe [Int], Maybe Int)
-runProgram program' line inputValue outputValue = 
+runProgram2 :: [Int] -> Int -> Bool -> Maybe [Int] -> Maybe Int -> Maybe ([Int], Int, Maybe [Int], Maybe Int)
+runProgram2 program' line haltOnOutput inputValue outputValue = 
     let tempOpcode = program' !! line
         mode = tempOpcode `div` 100
         opcode = tempOpcode `mod` 100 in
@@ -113,32 +113,38 @@ runProgram program' line inputValue outputValue =
                 -- newLineValue = (line + getOpcodeLength opcode) `debug` test "Oper" opcode tempOpcode mode program' line outputValue in
                 newLineValue = (line + getOpcodeLength opcode) in
             case opcode of
-                1 -> runProgram (replaceNth (fromJust (getOperandAddr' 3)) (fromJust (getOperandValue' 1) + fromJust (getOperandValue' 2)) program') newLineValue inputValue outputValue
-                2 -> runProgram (replaceNth (fromJust (getOperandAddr' 3)) (fromJust (getOperandValue' 1) * fromJust (getOperandValue' 2)) program') newLineValue inputValue outputValue
+                1 -> runProgram2 (replaceNth (fromJust (getOperandAddr' 3)) (fromJust (getOperandValue' 1) + fromJust (getOperandValue' 2)) program') newLineValue haltOnOutput inputValue outputValue
+                2 -> runProgram2 (replaceNth (fromJust (getOperandAddr' 3)) (fromJust (getOperandValue' 1) * fromJust (getOperandValue' 2)) program') newLineValue haltOnOutput inputValue outputValue
                 3 -> case inputValue of
                         Nothing -> Nothing
                         Just [] -> Nothing
                         _ -> let h = head $ fromJust inputValue
                                  t = tail $ fromJust inputValue in
-                                 runProgram (replaceNth (fromJust (getOperandAddr' 1)) h program') newLineValue (Just t) outputValue
+                                 runProgram2 (replaceNth (fromJust (getOperandAddr' 1)) h program') newLineValue haltOnOutput (Just t) outputValue
                 4 -> let operand1Value = getOperandValue' 1 in 
-                    runProgram program' newLineValue inputValue operand1Value
+                    if haltOnOutput then
+                        Just(program', newLineValue, inputValue, operand1Value)
+                    else
+                        runProgram2 program' newLineValue haltOnOutput inputValue operand1Value
                 5 -> let operand1Value = fromJust (getOperandValue' 1) in
                         if operand1Value /= 0 then
-                            runProgram program' (fromJust (getOperandValue' 2)) inputValue outputValue
+                            runProgram2 program' (fromJust (getOperandValue' 2)) haltOnOutput inputValue outputValue
                         else
-                            runProgram program' newLineValue inputValue outputValue
+                            runProgram2 program' newLineValue haltOnOutput inputValue outputValue
                 6 -> let operand1Value = fromJust (getOperandValue' 1) in
                         if operand1Value == 0 then
-                            runProgram program' (fromJust (getOperandValue' 2)) inputValue outputValue
+                            runProgram2 program' (fromJust (getOperandValue' 2)) haltOnOutput inputValue outputValue
                         else
-                            runProgram program' newLineValue inputValue outputValue
+                            runProgram2 program' newLineValue haltOnOutput inputValue outputValue
                 7 -> let operand1Value = fromJust (getOperandValue' 1) 
                          operand2Value = fromJust (getOperandValue' 2) 
                          comparison = fromEnum (operand1Value < operand2Value) in
-                         runProgram (replaceNth (fromJust (getOperandAddr' 3)) comparison program') newLineValue inputValue outputValue
+                         runProgram2 (replaceNth (fromJust (getOperandAddr' 3)) comparison program') newLineValue haltOnOutput inputValue outputValue
                 8 -> let operand1Value = fromJust (getOperandValue' 1) 
                          operand2Value = fromJust (getOperandValue' 2) 
                          comparison = fromEnum (operand1Value == operand2Value) in
-                         runProgram (replaceNth (fromJust (getOperandAddr' 3)) comparison program') newLineValue inputValue outputValue
+                         runProgram2 (replaceNth (fromJust (getOperandAddr' 3)) comparison program') newLineValue haltOnOutput inputValue outputValue
                 _ -> Nothing
+
+runProgram :: [Int] -> Int -> Maybe [Int] -> Maybe Int -> Maybe ([Int], Int, Maybe [Int], Maybe Int)
+runProgram program' line inputValue outputValue = runProgram2 program' line False inputValue outputValue
