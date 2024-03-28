@@ -30,8 +30,13 @@ Day07.exe
 @REM  can be sent to the thrusters?
 @REM ([7,5,9,6,8],33660560)
 
-@REM ghc --make Day09.hs
-@REM Day09.exe
+ghc --make Day09.hs
+Day09.exe
+@REM  Question 1: Once your Intcode computer is fully functional, the
+@REM   BOOST program should report no malfunctioning opcodes when run
+@REM  in test mode; it should only output a single value, the BOOST
+@REM  keycode. What BOOST keycode does it produce?
+@REM 3780860499
 
 @REM ghc --make Day11.hs
 @REM Day11.exe

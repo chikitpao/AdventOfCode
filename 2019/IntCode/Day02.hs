@@ -7,12 +7,12 @@
 import IntCode
 
 
-modifiedProgram :: Int -> Int -> IO [Int]
+modifiedProgram :: Int -> Int -> IO MyProgram
 modifiedProgram noun verb = do
-    program' <- program "Day02_input.txt"
-    let program'' = replaceNth 1 noun program'
-        program''' = replaceNth 2 verb program''
-    return program'''
+    program <- readProgram "Day02_input.txt"
+    let program' = setValue 1 noun program
+        program'' = setValue 2 verb program'
+    return program''
 
 tryInputs :: Int -> IO (Maybe Int)
 tryInputs value
@@ -23,7 +23,7 @@ tryInputs value
                 let result' = runProgram modifiedProgram' 0 Nothing Nothing in
                     case result' of
                         Nothing -> tryInputs (value + 1)
-                        Just outp -> let output = head $ get1st outp in
+                        Just outp -> let output = head $ programCode $ stateProgram outp in
                             case output of
                                 19690720 -> return (Just value)
                                 _ -> tryInputs (value + 1)
@@ -35,7 +35,7 @@ main = do
     let result1 = runProgram modifiedProgram' 0 Nothing Nothing in
         case result1 of
             Nothing -> print "ERROR: Abnormal abortion"
-            Just endProgram-> print $ head $ get1st endProgram
+            Just endProgram-> print $ head $ programCode $ stateProgram endProgram
 
     putStrLn "Question 2: Find the input noun and verb that cause the program to produce the output 19690720."
     result2 <- tryInputs 0
