@@ -37,6 +37,9 @@ Day09.exe
 @REM  in test mode; it should only output a single value, the BOOST
 @REM  keycode. What BOOST keycode does it produce?
 @REM 3780860499
+@REM Question 2: Run the BOOST program in sensor boost mode. What
+@REM  are the coordinates of the distress signal?
+@REM 33343
 
 @REM ghc --make Day11.hs
 @REM Day11.exe
