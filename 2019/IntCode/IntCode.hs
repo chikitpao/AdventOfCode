@@ -22,7 +22,9 @@ stateInput,
 stateOutput,
 stateRelBase,
 stateIsHalted,
-createProgramState
+stateIsHaltedForInput,
+createProgramState,
+createProgramState2
 )
 where
 
@@ -31,7 +33,7 @@ import Data.Maybe ( fromJust, isNothing )
 import Control.Exception (assert)
 import Debug.Trace
 
--- debug = flip trace
+debug = flip trace
 
 replaceChar :: [Char] -> Char ->  [Char]
 replaceChar str ch = map (\c -> if c==ch then ' '; else c) str
@@ -47,22 +49,19 @@ data MyProgramState = MyProgramState {
                      stateProgram :: MyProgram
                      , stateNextLine :: Int
                      , stateInput :: Maybe [Int]
-                     , stateOutput :: Maybe Int
+                     , stateOutput :: Maybe [Int]
                      , stateRelBase :: Int
+                     , stateIsHaltedForInput :: Bool
+                     , stateIsHalted :: Bool
                      } deriving (Show)
 
-
-stateIsHalted :: MyProgramState -> Bool
-stateIsHalted state = 
-    let program = stateProgram state
-        code = programCode program
-        nextLine = stateNextLine state 
-        nextLineCode = code !! nextLine in
-        nextLineCode `mod` 100 == 99
-
-
-createProgramState :: MyProgram -> Int -> Maybe [Int] -> Maybe Int -> Int -> MyProgramState
+createProgramState :: MyProgram -> Int -> Maybe [Int] -> Maybe [Int] -> Int -> Bool -> Bool-> MyProgramState
 createProgramState = MyProgramState 
+
+-- Like createProgramState but reset "halted" states
+createProgramState2 :: MyProgram -> Int -> Maybe [Int] -> Maybe [Int] -> Int -> MyProgramState
+createProgramState2 stateProgram stateNextLine stateInput stateOutput stateRelBase = 
+    createProgramState stateProgram stateNextLine stateInput stateOutput stateRelBase False False
 
 readProgram :: [Char] -> IO MyProgram
 readProgram fileName = do
@@ -150,21 +149,21 @@ helper opcode program line
     | getOpcodeLength opcode == 4 = "[" ++ show (program !! (line + 1)) ++ ", " ++ show(program !! (line + 2)) ++ ", " ++ show (program !! (line + 3)) ++  "]"
 
 -- debug function
-test :: String -> Int -> Int -> Int -> MyProgram -> Int -> Int ->  Maybe Int -> String
+test :: String -> Int -> Int -> Int -> MyProgram -> Int -> Int -> Maybe [Int] -> String
 test c opcode testOpcode mode program line relBase outputValue
     | opcode == 99 = show line ++ " " ++ show testOpcode ++ "[] " ++ c ++ " " ++ show outputValue ++ " " ++ show mode
     | otherwise = show line ++ " " ++ show testOpcode ++ " " ++ helper opcode (programCode program) line ++  " " ++ show outputValue ++ " " ++ show mode ++ " " ++ show relBase
 
 -- runProgram3: run program, specify haltOnOutput and relBase explicitly
-runProgram3 :: MyProgram -> Int -> Bool -> Int -> Maybe [Int] -> Maybe Int -> Maybe MyProgramState
+runProgram3 :: MyProgram -> Int -> Bool -> Int -> Maybe [Int] -> Maybe [Int] -> Maybe MyProgramState
 runProgram3 program line haltOnOutput relBase inputValue outputValue = 
     let tempOpcode = programCode program !! line
         mode = tempOpcode `div` 100
         opcode = tempOpcode `mod` 100 in
         if not (checkProgramLength line (length $ programCode program) opcode) then
-            Nothing
+            error "Instruction Pointer out of bound"
         else if opcode == 99 then
-            Just (MyProgramState program line inputValue outputValue relBase)
+            Just (MyProgramState program line inputValue outputValue relBase False True)
         else
             let getOperandAddr' = getOperandAddr program opcode mode line relBase
                 getOperandValue' = getOperandValue program opcode mode line relBase
@@ -180,15 +179,16 @@ runProgram3 program line haltOnOutput relBase inputValue outputValue =
                          runProgram3 (setValue (fromJust (getOperandAddr' 3)) product program) newLineValue haltOnOutput relBase inputValue outputValue
                 3 -> case inputValue of
                         Nothing -> Nothing
-                        Just [] -> Nothing
+                        Just [] -> Just (MyProgramState program line inputValue outputValue relBase True False)
                         _ -> let h = head $ fromJust inputValue
                                  t = tail $ fromJust inputValue in
                                  runProgram3 (setValue (fromJust (getOperandAddr' 1)) h program) newLineValue haltOnOutput relBase (Just t) outputValue
-                4 -> let operand1Value = getOperandValue' 1 in 
+                4 -> let operand1Value = getOperandValue' 1 
+                         newOutputValue = if isNothing outputValue then Just[fromJust operand1Value] else (++) <$> outputValue <*> Just[fromJust operand1Value] in 
                     if haltOnOutput then
-                        Just (MyProgramState program newLineValue inputValue operand1Value relBase)
+                        Just (MyProgramState program newLineValue inputValue newOutputValue relBase False False)
                     else
-                        runProgram3 program newLineValue haltOnOutput relBase inputValue operand1Value
+                        runProgram3 program newLineValue haltOnOutput relBase inputValue newOutputValue
                 5 -> let operand1Value = fromJust (getOperandValue' 1) in
                         if operand1Value /= 0 then
                             runProgram3 program (fromJust (getOperandValue' 2)) haltOnOutput relBase inputValue outputValue
@@ -211,11 +211,11 @@ runProgram3 program line haltOnOutput relBase inputValue outputValue =
                 _ -> Nothing
 
 -- runProgram2: run program (specify haltOnOutput explcitly, use default relBase)
-runProgram2 :: MyProgram -> Int -> Bool -> Maybe [Int] -> Maybe Int -> Maybe MyProgramState
+runProgram2 :: MyProgram -> Int -> Bool -> Maybe [Int] -> Maybe [Int] -> Maybe MyProgramState
 runProgram2 program line haltOnOutput = runProgram3 program line haltOnOutput 0
 
 -- runProgram: run program (use default haltOnOutput and relBase)
-runProgram :: MyProgram -> Int -> Maybe [Int] -> Maybe Int -> Maybe MyProgramState
+runProgram :: MyProgram -> Int -> Maybe [Int] -> Maybe [Int] -> Maybe MyProgramState
 runProgram program line = runProgram2 program line False
 
 -- runProgramWithState: run program with state parameter, specify haltOnOutput explicitly

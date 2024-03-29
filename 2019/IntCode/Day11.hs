@@ -42,9 +42,9 @@ doPaint panels programState step posX posY dir oldColor = assert(null (fromJust 
         case result1 of
             Nothing -> Nothing
             Just newProgramState1 -> 
-                let newOutput1 = stateOutput newProgramState1
-                    valuefunc _ = newOutput1
-                    result2 = runProgram3 (stateProgram newProgramState1) (stateNextLine newProgramState1) True (stateRelBase newProgramState1) (stateInput newProgramState1) newOutput1 in
+                let (h, t) = splitAt 1 $ fromJust $ stateOutput newProgramState1
+                    valuefunc _ = Just $ head h
+                    result2 = runProgram3 (stateProgram newProgramState1) (stateNextLine newProgramState1) True (stateRelBase newProgramState1) (stateInput newProgramState1) (Just t) in
                     case result2 of
                         Nothing -> Nothing
                         Just newProgramState2 -> 
@@ -52,10 +52,10 @@ doPaint panels programState step posX posY dir oldColor = assert(null (fromJust 
                                 Just panels
                             else
                                 let newPanels = Map.alter valuefunc (posX, posY) panels
-                                    newOutput2 = stateOutput newProgramState2
-                                    (newPosX, newPosY, newDir) = turnPos posX posY dir (fromJust newOutput2) 
+                                    (h2, t2) = splitAt 1 $ fromJust $ stateOutput newProgramState2
+                                    (newPosX, newPosY, newDir) = turnPos posX posY dir (head h2) 
                                     newColor = Map.findWithDefault 0 (newPosX, newPosY) newPanels 
-                                    programStateForIntput = createProgramState (stateProgram newProgramState2) (stateNextLine newProgramState2) (stateInput newProgramState2) newOutput2 (stateRelBase newProgramState2) in
+                                    programStateForIntput = createProgramState2 (stateProgram newProgramState2) (stateNextLine newProgramState2) (stateInput newProgramState2) (Just t) (stateRelBase newProgramState2) in
                                     doPaint newPanels programStateForIntput (step + 1) newPosX newPosY newDir newColor -- `debug` ("steps " ++ show step ++ " pos " ++ show newPosX ++ " " ++ show newPosY ++ " dir " ++ show (fromEnum newDir))
 
 
@@ -81,13 +81,13 @@ main = do
     putStrLn "Question 1: Build a new emergency hull painting robot and run"
     putStrLn " the Intcode program on it. How many panels does it paint at"
     putStrLn " least once?"
-    let drawing1 = fromJust $ doPaint Map.empty (createProgramState program 0 (Just []) Nothing 0) 1 0 0 North 0 in
+    let drawing1 = fromJust $ doPaint Map.empty (createProgramState2 program 0 (Just []) Nothing 0) 1 0 0 North 0 in
         print $ Map.size drawing1
 
     putStrLn "Question 2: After starting the robot on a single white panel "
     putStrLn " instead, what registration identifier does it paint on your "
     putStrLn " hull?"
-    let drawing2 = fromJust $ doPaint Map.empty (createProgramState program 0 (Just []) Nothing 0) 1 0 0 North 1 in
+    let drawing2 = fromJust $ doPaint Map.empty (createProgramState2 program 0 (Just []) Nothing 0) 1 0 0 North 1 in
         paintDrawing drawing2
 
 -- Answer1: 2172

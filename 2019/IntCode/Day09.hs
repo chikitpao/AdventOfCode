@@ -30,14 +30,14 @@ main = do
     let result1 = runProgram program 0 (Just [1]) Nothing in
         case result1 of
             Nothing -> print "ERROR: Abnormal abortion"
-            Just endProgram -> print $ fromJust $ stateOutput endProgram
+            Just endProgram -> print $ last $ fromJust $ stateOutput endProgram
 
     putStrLn "Question 2: Run the BOOST program in sensor boost mode. What"
     putStrLn" are the coordinates of the distress signal?"
     let result2 = runProgram program 0 (Just [2]) Nothing in
         case result2 of
             Nothing -> print "ERROR: Abnormal abortion"
-            Just endProgram -> print $ fromJust $ stateOutput endProgram
+            Just endProgram -> print $ last $ fromJust $ stateOutput endProgram
 
 -- Answer1: 3780860499
 -- Answer2: 33343

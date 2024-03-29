@@ -24,9 +24,9 @@ thruster program input input2 current end =
     case result of
     Nothing -> (input, -1)
     Just endProgram -> if current + 1 == end then
-                            (input, fromJust $ stateOutput endProgram)
+                            (input, last $ fromJust $ stateOutput endProgram)
                         else
-                            thruster program input (fromJust $ stateOutput endProgram) (current + 1) end
+                            thruster program input (last $ fromJust $ stateOutput endProgram) (current + 1) end
 
 
 thrusterChain :: MyProgram -> [Int] -> ([Int], Int)
@@ -52,21 +52,23 @@ thrusterChain2_CheckResult input programStates current end result =
         if current + 1 == end then
             let program = stateProgram endProgram
                 nextLine = stateNextLine endProgram in
-                if stateIsHalted endProgram then
-                    (input, fromJust $ stateOutput endProgram)
+                if stateIsHalted endProgram || ((programCode program !! nextLine) `mod` 100 == 99) then
+                    (input, last $ fromJust $ stateOutput endProgram)
                 else
                     let newCurrent = 0
                         oldProgramState1 = fromJust programStates !! current
-                        newProgramStates1 = replaceProgramState programStates current (createProgramState program nextLine (stateInput endProgram) (stateOutput endProgram) (stateRelBase endProgram))
+                        (h, t) = splitAt 1 $ fromJust $ stateOutput endProgram
+                        newProgramStates1 = replaceProgramState programStates current (createProgramState2 program nextLine (stateInput endProgram) (Just t) (stateRelBase endProgram))
                         oldProgramState2 = fromJust programStates !! newCurrent
-                        newProgramStates2 = replaceProgramState newProgramStates1 newCurrent (createProgramState (stateProgram oldProgramState2) (stateNextLine oldProgramState2) ((++) <$> stateInput oldProgramState2 <*> Just [fromJust $ stateOutput endProgram]) (stateOutput oldProgramState2) (stateRelBase oldProgramState2)) in
+                        newProgramStates2 = replaceProgramState newProgramStates1 newCurrent (createProgramState2 (stateProgram oldProgramState2) (stateNextLine oldProgramState2) ((++) <$> stateInput oldProgramState2 <*> Just [head h]) (stateOutput oldProgramState2) (stateRelBase oldProgramState2)) in
                     thrusterChain2 program input newProgramStates2 newCurrent end
         else
             let newCurrent = current + 1
                 oldProgramState1 = fromJust programStates !! current
-                newProgramStates1 = replaceProgramState programStates current (createProgramState (stateProgram endProgram) (stateNextLine endProgram) (stateInput endProgram) (stateOutput endProgram) (stateRelBase endProgram))
+                (h, t) = splitAt 1 $ fromJust $ stateOutput endProgram
+                newProgramStates1 = replaceProgramState programStates current (createProgramState2 (stateProgram endProgram) (stateNextLine endProgram) (stateInput endProgram) (Just t) (stateRelBase endProgram))
                 oldProgramState2 = fromJust programStates !! newCurrent
-                newProgramStates2 = replaceProgramState newProgramStates1 newCurrent (createProgramState (stateProgram oldProgramState2) (stateNextLine oldProgramState2) ((++) <$> stateInput oldProgramState2 <*> Just [fromJust $ stateOutput endProgram]) (stateOutput oldProgramState2) (stateRelBase oldProgramState2)) in
+                newProgramStates2 = replaceProgramState newProgramStates1 newCurrent (createProgramState2 (stateProgram oldProgramState2) (stateNextLine oldProgramState2) ((++) <$> stateInput oldProgramState2 <*> Just [head h]) (stateOutput oldProgramState2) (stateRelBase oldProgramState2)) in
             thrusterChain2 (stateProgram endProgram) input newProgramStates2 newCurrent end
 
 
@@ -79,7 +81,7 @@ getStartInput input index
 thrusterChain2 :: MyProgram -> [Int] -> Maybe[MyProgramState] -> Int -> Int -> ([Int], Int)
 thrusterChain2 program input programStates current end = 
     if isNothing programStates then
-        let newProgramStates = [createProgramState program 0 (Just $ getStartInput input i) Nothing 0 | i <-[0..end-1]]
+        let newProgramStates = [createProgramState2 program 0 (Just $ getStartInput input i) Nothing 0 | i <-[0..end-1]]
             newProgramState = newProgramStates !! current
             result = runProgram2 program 0 True (stateInput newProgramState) Nothing in
             thrusterChain2_CheckResult input (Just newProgramStates) current end result

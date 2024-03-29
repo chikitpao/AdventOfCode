@@ -62,6 +62,10 @@ Day13.exe
 @REM Question 1:How many block tiles are on the screen when the game
 @REM  exits?
 @REM 306
+@REM Question 2: What is your score after the last block is broken?
+@REM Balls: [((20,21),Ball)]
+@REM Paddles: [((22,24),Paddle)]
+@REM 15328
 
 @REM ghc --make Day15.hs
 @REM Day15.exe
