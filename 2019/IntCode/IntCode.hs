@@ -11,6 +11,7 @@ setValue,
 runProgram,
 runProgram2,
 runProgram3,
+runProgramWithState,
 MyProgram,
 programCode,
 programMemory,
@@ -216,3 +217,13 @@ runProgram2 program line haltOnOutput = runProgram3 program line haltOnOutput 0
 -- runProgram: run program (use default haltOnOutput and relBase)
 runProgram :: MyProgram -> Int -> Maybe [Int] -> Maybe Int -> Maybe MyProgramState
 runProgram program line = runProgram2 program line False
+
+-- runProgramWithState: run program with state parameter, specify haltOnOutput explicitly
+runProgramWithState :: MyProgramState -> Bool -> Maybe MyProgramState
+runProgramWithState programState haltOnOutput =
+    let program = stateProgram programState
+        nextLine = stateNextLine programState
+        input = stateInput programState 
+        output = stateOutput programState
+        relBase = stateRelBase programState in
+    runProgram3 program nextLine haltOnOutput relBase input output

@@ -57,8 +57,11 @@ Day11.exe
 @REM "   ######            ######      ######                        ######                        ######                        ######                        ######            ######      ######            ######      ######                              "
 @REM "         ############            ########################      ########################      ########################      ######                              ##################      ######            ######      ######                              "
 
-@REM ghc --make Day13.hs
-@REM Day13.exe
+ghc --make Day13.hs
+Day13.exe
+@REM Question 1:How many block tiles are on the screen when the game
+@REM  exits?
+@REM 306
 
 @REM ghc --make Day15.hs
 @REM Day15.exe
