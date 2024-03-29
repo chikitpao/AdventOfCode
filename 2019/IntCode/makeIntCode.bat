@@ -41,8 +41,21 @@ Day09.exe
 @REM  are the coordinates of the distress signal?
 @REM 33343
 
-@REM ghc --make Day11.hs
-@REM Day11.exe
+ghc --make Day11.hs
+Day11.exe
+@REM Question 1: Build a new emergency hull painting robot and run
+@REM  the Intcode program on it. How many panels does it paint at
+@REM  least once?
+@REM 2172
+@REM Question 2: After starting the robot on a single white panel
+@REM  instead, what registration identifier does it paint on your
+@REM  hull?
+@REM "               ############      ########################      ######                        ########################      ########################            ############            ######            ######      ##################                  "
+@REM "                     ######      ######                        ######                        ######                        ######                        ######            ######      ######            ######      ######            ######            "
+@REM "                     ######      ##################            ######                        ##################            ##################            ######                        ########################      ######            ######            "
+@REM "                     ######      ######                        ######                        ######                        ######                        ######      ############      ######            ######      ##################                  "
+@REM "   ######            ######      ######                        ######                        ######                        ######                        ######            ######      ######            ######      ######                              "
+@REM "         ############            ########################      ########################      ########################      ######                              ##################      ######            ######      ######                              "
 
 @REM ghc --make Day13.hs
 @REM Day13.exe

@@ -51,9 +51,8 @@ thrusterChain2_CheckResult input programStates current end result =
         let endProgram = fromJust result in
         if current + 1 == end then
             let program = stateProgram endProgram
-                code = programCode program
-                nextLine = stateNextLine endProgram in 
-                if (code !! nextLine) `mod` 100 == 99 then
+                nextLine = stateNextLine endProgram in
+                if stateIsHalted endProgram then
                     (input, fromJust $ stateOutput endProgram)
                 else
                     let newCurrent = 0

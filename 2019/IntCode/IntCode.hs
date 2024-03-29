@@ -10,6 +10,7 @@ readProgram,
 setValue,
 runProgram,
 runProgram2,
+runProgram3,
 MyProgram,
 programCode,
 programMemory,
@@ -19,6 +20,7 @@ stateNextLine,
 stateInput,
 stateOutput,
 stateRelBase,
+stateIsHalted,
 createProgramState
 )
 where
@@ -39,6 +41,7 @@ data MyProgram  = MyProgram {
                     , programMemory :: Maybe (Map.Map Int Int)
                     } deriving (Show)
 
+
 data MyProgramState = MyProgramState {
                      stateProgram :: MyProgram
                      , stateNextLine :: Int
@@ -46,6 +49,16 @@ data MyProgramState = MyProgramState {
                      , stateOutput :: Maybe Int
                      , stateRelBase :: Int
                      } deriving (Show)
+
+
+stateIsHalted :: MyProgramState -> Bool
+stateIsHalted state = 
+    let program = stateProgram state
+        code = programCode program
+        nextLine = stateNextLine state 
+        nextLineCode = code !! nextLine in
+        nextLineCode `mod` 100 == 99
+
 
 createProgramState :: MyProgram -> Int -> Maybe [Int] -> Maybe Int -> Int -> MyProgramState
 createProgramState = MyProgramState 
