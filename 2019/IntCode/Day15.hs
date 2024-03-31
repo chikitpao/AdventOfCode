@@ -7,6 +7,7 @@
 import Control.Exception (assert)
 import IntCode
 import qualified Data.Map as Map
+import qualified Data.Set as Set
 import Data.Maybe (fromJust, fromMaybe, isJust, isNothing)
 import Debug.Trace
 
@@ -41,11 +42,10 @@ updateMaze maze vtingEmpty vtingWall = Maze (Map.fromList vtingEmpty) (Map.union
 -- Breadth-first search
 part1 :: Map.Map (Int, Int) MyProgramState -> Maze -> Int -> Int
 part1 programStates maze steps =
-    -- nextSteps1 -> Map with key = next positions and values = [current positions, state after next program call]
+    -- nextStepsTemp -> Map with key = next position and value = [current position, state after next program call]
     let nextStepsTemp = [(nextPos vPos (toEnum i::Command), (vPos, fromJust $ runProgramWithState (nextProgramState programStates vPos i) True))
              | vPos <- Map.keys $ visiting maze, i <- [1..4]] 
         nextStepsFiltered = [ns | ns <- nextStepsTemp, Map.notMember (fst ns) (visiting maze) && Map.notMember (fst ns) (visited maze)]in
-    -- if any (\x -> (head $ fromJust (stateOutput (snd (snd x))) == (fromEnum O2System))) nextStepsFiltered  then
     if any (\x -> head (fromJust $ stateOutput (snd (snd x))) == fromEnum O2System) nextStepsFiltered then
         steps + 1
     else
@@ -57,6 +57,49 @@ part1 programStates maze steps =
             (posEmpty, _) = unzip vtingEmpty
             newProgramStates = Map.fromList [(f, createProgramState2 (stateProgram s2) (stateNextLine s2) (Just []) (Just []) (stateRelBase s2)) | (f, (_, s2)) <- Map.assocs nextSteps, f `elem` posEmpty] in
         part1 newProgramStates newMaze (steps + 1)
+
+updateMaze2 :: Maze -> [((Int, Int), Int)] -> [((Int, Int), Int)] -> [((Int, Int), Int)] -> Maze
+updateMaze2 maze vtingEmpty vtingWall vtingO2System = 
+    let vting = Map.union (Map.fromList vtingEmpty) (Map.fromList vtingO2System)
+        vted = Map.union (Map.union (visited maze) (visiting maze)) (Map.fromList vtingWall) in
+            Maze vting vted
+
+-- Breadth-first search like part1, but finish when the whole map is explored.
+-- Returns the whole map.
+part2Maze :: Map.Map (Int, Int) MyProgramState -> Maze -> Maze
+part2Maze programStates maze =
+    -- nextStepsTemp -> Map with key = next position and value = [current position, state after next program call]
+    let nextStepsTemp = [(nextPos vPos (toEnum i::Command), (vPos, fromJust $ runProgramWithState (nextProgramState programStates vPos i) True))
+             | vPos <- Map.keys $ visiting maze, i <- [1..4]] 
+        nextStepsFiltered = [ns | ns <- nextStepsTemp, Map.notMember (fst ns) (visiting maze) && Map.notMember (fst ns) (visited maze)]in
+        let nextSteps = Map.fromList nextStepsFiltered-- Remove duplicated next positions
+            vting = [(f, head $ fromJust $ stateOutput s2) | (f, (_, s2)) <- Map.assocs nextSteps] in
+        if null vting then
+            maze
+        else
+            let vtingEmpty = [(f, s) | (f, s) <- vting, s == fromEnum Empty]
+                vtingWall = [(f, s) | (f, s) <- vting, s == fromEnum Wall]
+                vtingO2System = [(f, s) | (f, s) <- vting, s == fromEnum O2System]
+                newMaze = updateMaze2 maze vtingEmpty vtingWall vtingO2System
+                (posEmpty, _) = unzip vtingEmpty
+                (posO2System, _) = unzip vtingO2System
+                newProgramStates = Map.fromList [(f, createProgramState2 (stateProgram s2) (stateNextLine s2) (Just []) (Just []) (stateRelBase s2)) 
+                    | (f, (_, s2)) <- Map.assocs nextSteps, f `elem` posEmpty || f `elem` posO2System] in
+            part2Maze newProgramStates newMaze
+
+fillOxygen :: [((Int, Int), Int)] -> [((Int, Int), Int)] -> [((Int, Int), Int)] -> Int -> Int
+fillOxygen vting vted notVisited steps = 
+    let (posNotVisited, _ ) = unzip notVisited
+        nextStepsTemp = [nextPos f (toEnum i::Command) | (f, s) <- vting, i <- [1..4]]
+        nextStepsUnique = Set.toList (Set.fromList nextStepsTemp)
+        nextStepsFiltered = [ns | ns <- nextStepsUnique, ns `elem` posNotVisited]
+        newVisiting = [nv | nv <- notVisited, fst nv `elem` nextStepsFiltered]
+        newNotVisited = [nv | nv <- notVisited,  fst nv `notElem` nextStepsFiltered] 
+        newVisited = vted ++ vting in
+        if null newVisiting then
+            steps
+        else
+            fillOxygen newVisiting newVisited newNotVisited (steps + 1)
 
 
 main :: IO ()
@@ -71,6 +114,13 @@ main = do
 
     putStrLn "Question 2: Use the repair droid to get a complete map of the"
     putStrLn " area. How many minutes will it take to fill with oxygen?"
+    let maze = part2Maze (Map.singleton (0, 0) programState) (Maze (Map.singleton (0, 0) (fromEnum Empty)) Map.empty)
+    -- print $ show (Map.size (visiting maze)) ++ " " ++ show (Map.size (visited maze)) -- "0 1659"
+        newVisiting = [t | t <- Map.assocs (visited maze), snd t == fromEnum Empty]
+        newVisited = [t | t <- Map.assocs (visited maze), snd t == fromEnum Wall]
+        o2Pos = [t | t <- Map.assocs (visited maze), snd t == fromEnum O2System]
+    print $ fillOxygen o2Pos newVisited newVisiting 0
 
 -- Answer1: 270
--- Answer2: 
+-- Answer2: 364
+

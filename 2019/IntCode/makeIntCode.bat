@@ -77,7 +77,7 @@ if %startProgram% LEQ 15 Day15.exe
 @REM 270
 @REM Question 2: Use the repair droid to get a complete map of the
 @REM  area. How many minutes will it take to fill with oxygen?
-@REM TODO
+@REM 364
 
 @REM ghc --make Day17.hs
 @REM if %startProgram% LEQ 17 Day17.exe
