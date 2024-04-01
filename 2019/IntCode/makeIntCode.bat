@@ -2,7 +2,7 @@ del *.exe
 del *.hi
 del *.o
 
-set /A startProgram=15
+set /A startProgram=17
 
 ghc --make Day02.hs
 if %startProgram% LEQ 2 Day02.exe
@@ -79,8 +79,11 @@ if %startProgram% LEQ 15 Day15.exe
 @REM  area. How many minutes will it take to fill with oxygen?
 @REM 364
 
-@REM ghc --make Day17.hs
-@REM if %startProgram% LEQ 17 Day17.exe
+ghc --make Day17.hs
+if %startProgram% LEQ 17 Day17.exe
+@REM Question 1: What is the sum of the alignment parameters for the
+@REM  scaffold intersections?
+@REM 7780
 
 @REM ghc --make Day19.hs
 @REM if %startProgram% LEQ 19 Day19.exe
