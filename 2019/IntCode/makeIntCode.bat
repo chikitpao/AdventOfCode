@@ -83,7 +83,13 @@ ghc --make Day17.hs
 if %startProgram% LEQ 17 Day17.exe
 @REM Question 1: What is the sum of the alignment parameters for the
 @REM  scaffold intersections?
-@REM 7780
+@REM "Answer 1: 7780"
+@REM Question 2: After visiting every part of the scaffold at least
+@REM  once, how much dust does the vacuum robot report it has
+@REM  collected?
+@REM "Robot: (42,14,'^')"
+@REM "Complete Sequence: L,6,R,8,R,12,L,6,L,8,L,10,L,8,R,12,L,6,R,8,R,12,L,6,L,8,L,8,L,10,L,6,L,6,L,10,L,8,R,12,L,8,L,10,L,6,L,6,L,10,L,8,R,12,L,6,R,8,R,12,L,6,L,8,L,8,L,10,L,6,L,6,L,10,L,8,R,12"
+@REM "Answer 2: 1075882"
 
 @REM ghc --make Day19.hs
 @REM if %startProgram% LEQ 19 Day19.exe

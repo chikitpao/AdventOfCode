@@ -72,7 +72,7 @@ readProgram fileName = do
 setValue :: Int -> Int -> MyProgram-> MyProgram
 setValue index value oldProgram = 
     let valuefunc _ = Just value in
-    if index >= length (programCode oldProgram)  then
+    if index >= length (programCode oldProgram) then
         if isNothing (programMemory oldProgram) then
             MyProgram  (programCode oldProgram) (Just (Map.singleton index value))
         else
@@ -125,18 +125,33 @@ getOperandValue program opcode mode line relBase pos
             -- position mode
             0 -> let actualPos = fromJust $ getOperandAddr program opcode mode line relBase pos in
                     if actualPos >= length (programCode program) then
-                        Just(fromJust (programMemory program) Map.! actualPos)
+                        if Map.member actualPos (fromJust (programMemory program)) then
+                            Just(fromJust (programMemory program) Map.! actualPos)
+                        else
+                            -- error ("getOperandValue position mode " ++ show actualPos)
+                            -- Read default 0
+                            Just 0
                     else
                         Just(programCode program !! actualPos)
             -- immediate mode
             1 -> if line + pos >= length (programCode program) then
-                    Just(fromJust (programMemory program) Map.! (line + pos))
+                    if Map.member (line + pos) (fromJust (programMemory program)) then
+                        Just(fromJust (programMemory program) Map.! (line + pos))
+                    else
+                        -- error ("getOperandValue immediate mode " ++ show (line + pos))
+                        -- Read default 0
+                        Just 0
                  else
                     Just(programCode program !! (line + pos))
-            -- relative modes
+            -- relative mode
             2 -> let actualPos = fromJust $ getOperandAddr program opcode mode line relBase pos in
                     if actualPos >= length (programCode program) then
-                        Just(fromJust (programMemory program) Map.! actualPos)
+                        if Map.member actualPos (fromJust (programMemory program)) then
+                            Just(fromJust (programMemory program) Map.! actualPos)
+                        else
+                            -- error ("getOperandValue relative mode " ++ show actualPos ++ " RelBase " ++ show relBase)
+                            -- Read default 0
+                            Just 0
                     else
                         Just(programCode program !! actualPos)
             _ -> Nothing
