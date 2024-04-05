@@ -101,7 +101,7 @@ if %startProgram% LEQ 19 Day19.exe
 @REM  the point closest to the emitter. What value do you get if you
 @REM  take that point's X coordinate, multiply it by 10000, then add
 @REM  the point's Y coordinate?
-@REM TODO
+@REM "Answer 2: 2610980"
 
 @REM ghc --make Day21.hs
 @REM if %startProgram% LEQ 21 Day21.exe
