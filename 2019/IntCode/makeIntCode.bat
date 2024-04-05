@@ -2,7 +2,7 @@ del *.exe
 del *.hi
 del *.o
 
-set /A startProgram=17
+set /A startProgram=19
 
 ghc --make Day02.hs
 if %startProgram% LEQ 2 Day02.exe
@@ -91,8 +91,17 @@ if %startProgram% LEQ 17 Day17.exe
 @REM "Complete Sequence: L,6,R,8,R,12,L,6,L,8,L,10,L,8,R,12,L,6,R,8,R,12,L,6,L,8,L,8,L,10,L,6,L,6,L,10,L,8,R,12,L,8,L,10,L,6,L,6,L,10,L,8,R,12,L,6,R,8,R,12,L,6,L,8,L,8,L,10,L,6,L,6,L,10,L,8,R,12"
 @REM "Answer 2: 1075882"
 
-@REM ghc --make Day19.hs
-@REM if %startProgram% LEQ 19 Day19.exe
+ghc --make Day19.hs
+if %startProgram% LEQ 19 Day19.exe
+@REM Question 1: How many points are affected by the tractor beam
+@REM  in the 50x50 area closest to the emitter?
+@REM "Answer 1: 156"
+@REM Question 2: Find the 100x100 square closest to the emitter that
+@REM  fits entirely within the tractor beam; within that square, find
+@REM  the point closest to the emitter. What value do you get if you
+@REM  take that point's X coordinate, multiply it by 10000, then add
+@REM  the point's Y coordinate?
+@REM TODO
 
 @REM ghc --make Day21.hs
 @REM if %startProgram% LEQ 21 Day21.exe
