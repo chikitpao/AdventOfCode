@@ -2,7 +2,7 @@ del *.exe
 del *.hi
 del *.o
 
-set /A startProgram=19
+set /A startProgram=25
 
 ghc --make Day02.hs
 if %startProgram% LEQ 2 Day02.exe
@@ -109,5 +109,5 @@ if %startProgram% LEQ 19 Day19.exe
 @REM ghc --make Day23.hs
 @REM if %startProgram% LEQ 23 Day23.exe
 
-@REM ghc --make Day25.hs
-@REM if %startProgram% LEQ 25 Day25.exe
+ghc --make Day25.hs
+if %startProgram% LEQ 25 Day25.exe
