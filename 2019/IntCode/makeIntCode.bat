@@ -2,7 +2,7 @@ del *.exe
 del *.hi
 del *.o
 
-set /A startProgram=25
+set /A startProgram=23
 
 ghc --make Day02.hs
 if %startProgram% LEQ 2 Day02.exe
@@ -103,11 +103,17 @@ if %startProgram% LEQ 19 Day19.exe
 @REM  the point's Y coordinate?
 @REM "Answer 2: 2610980"
 
-@REM ghc --make Day21.hs
-@REM if %startProgram% LEQ 21 Day21.exe
+ghc --make Day21.hs
+if %startProgram% LEQ 21 Day21.exe
+@REM Question 1: What amount of hull damage does it report?
+@REM Answer 1: 19361332
+
 
 @REM ghc --make Day23.hs
 @REM if %startProgram% LEQ 23 Day23.exe
 
 ghc --make Day25.hs
 if %startProgram% LEQ 25 Day25.exe
+@REM A loud, robotic voice says "Analysis complete! You may proceed." and you enter the cockpit.
+@REM Santa notices your small droid, looks puzzled for a moment, realizes what has happened, and radios your ship directly.
+@REM "Oh, hello! You should be able to get in by typing 8462464 on the keypad at the main airlock."
