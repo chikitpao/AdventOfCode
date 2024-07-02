@@ -107,7 +107,8 @@ ghc --make Day21.hs
 if %startProgram% LEQ 21 Day21.exe
 @REM Question 1: What amount of hull damage does it report?
 @REM Answer 1: 19361332
-
+@REM Question 2: What amount of hull damage does the springdroid now report?
+@REM Answer 2: 1143351187
 
 @REM ghc --make Day23.hs
 @REM if %startProgram% LEQ 23 Day23.exe

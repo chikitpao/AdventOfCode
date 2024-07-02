@@ -1,7 +1,6 @@
 -- Day21.hs
 -- AoC 2019 Day 21: Springdroid Adventure
 -- Author: Chi-Kit Pao
--- TODO Finish Question 2
 --
 -- REMARK: Uses own module IntCode
 
@@ -28,13 +27,13 @@ main = do
     program <- readProgram "Day21_input.txt"
     -- let input1 = Just $ map ord $ "NOT D J\n" ++ "WALK\n"
     -- let input1 = Just $ map ord $ "NOT A J\n" ++ "WALK\n"
-    let input1 = map ord $   "NOT A J\n"
-                                ++  "NOT B T\n"
-                                ++  "OR T J\n"
-                                ++  "NOT C T\n"
-                                ++  "OR T J\n"
-                                ++  "AND D J\n"
-                                ++  "WALK\n"
+    let input1 = map ord $ "NOT A J\n"
+                        ++ "NOT B T\n"
+                        ++ "OR T J\n"
+                        ++ "NOT C T\n"
+                        ++ "OR T J\n"
+                        ++ "AND D J\n"
+                        ++ "WALK\n"
         (msg, result) = runSpringscript program input1
     putStrLn $ map chr msg
     
@@ -46,13 +45,17 @@ main = do
     putStr "\n\n"
 
 
-    let input2 = map ord $   "NOT A J\n"
-                                ++  "NOT B T\n"
-                                ++  "OR T J\n"
-                                ++  "NOT C T\n"
-                                ++  "OR T J\n"
-                                ++  "AND D J\n"
-                                ++  "RUN\n"
+    let input2 = map ord $ "NOT A J\n"
+                        ++ "NOT B T\n"
+                        ++ "OR T J\n"
+                        ++ "NOT C T\n"
+                        ++ "OR T J\n"
+                        ++ "AND D J\n"
+                        ++ "NOT E T\n"
+                        ++ "NOT T T\n"
+                        ++ "OR H T\n"
+                        ++ "AND T J\n"
+                        ++ "RUN\n"
         (msg, result) = runSpringscript program input2
     putStrLn $ map chr msg
 
@@ -63,4 +66,4 @@ main = do
             putStrLn $ "Answer 2: " ++ show (head result)
 
 -- Answer 1: 19361332
--- Answer 2: 
+-- Answer 2: 1143351187
