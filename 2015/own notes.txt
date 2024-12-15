@@ -1,0 +1,206 @@
+Day 1
+Question 1: To what floor do the instructions take Santa?
+Answer: Floor 280
+Question 2: What is the position of the character that causes Santa to first enter the basement?
+Answer: Floor 1797
+Time elapsed: 0.0009915828704833984 s
+
+
+Day 2
+Question 1: How many total square feet of wrapping paper should they order?
+Answer: 1588178
+Question 2: How many total feet of ribbon should they order?
+Answer: 3783758
+Time elapsed: 0.004003286361694336 s
+
+
+Day 3
+Question 1: How many houses receive at least one present?
+Answer: 2572
+Question 2: How many houses receive at least one present?
+Answer: 2631
+Time elapsed: 0.014999866485595703 s
+
+
+Day 4
+Question 1: Input for MD5 hash to start with five zeros?
+Answer: 117946
+Question 2: Input for MD5 hash to start with six zeros?
+Answer: 3938038
+Time elapsed: 4.846683025360107 s
+
+
+Day 5
+Question 1: How many strings are nice?
+Answer: 255
+Question 2: How many strings are nice under the new rules?
+Answer: 55
+Time elapsed: 0.013009071350097656 s
+
+
+Day 6
+Question 1: How many lights are lit?
+Answer: 569999
+Question 2: What is the total brightness of all lights combined?
+Answer: 17836115
+Time elapsed: 0.22099018096923828 s
+
+
+Day 7
+Question 1: What signal is ultimately provided to wire a?
+Answer: 956
+Question 2: What new signal is ultimately provided to wire a?
+Answer: 40149
+Time elapsed: 0.017006397247314453 s
+
+
+Day 8
+Question 1: Number of characters for string literals minus number of characters in memory for string values?
+Answer: 1350
+Question 2: Number of characters for newly encoded strings minus  number of characters in string literals?
+Answer: 2085
+Time elapsed: 0.0030012130737304688 s
+
+
+Day 9
+Question 1: What is the distance of the shortest route?
+Answer: 207
+Routes: [('Norrath', 'Straylight', 'Arbre', 'Faerun', 'AlphaCentauri', 'Snowdin', 'Tambi', 'Tristram'), ('Tristram', 'Tambi', 'Snowdin', 'AlphaCentauri', 'Faerun', 'Arbre', 'Straylight', 'Norrath')]
+Question 2: What is the distance of the longest route?
+Answer: 804
+Routes: [('Tambi', 'Faerun', 'Norrath', 'Tristram', 'AlphaCentauri', 'Arbre', 'Snowdin', 'Straylight'), ('Straylight', 'Snowdin', 'Arbre', 'AlphaCentauri', 'Tristram', 'Norrath', 'Faerun', 'Tambi')]
+Time elapsed: 0.08532929420471191 s
+
+
+Day 10
+Question 1: Length of sequence after 40 steps?
+Answer: 492982
+Question 2: Length of sequence after 50 steps?
+Answer: 6989950
+Time elapsed: 13.514383554458618 s
+
+
+Day 11
+Question 1: Next password?
+Answer: vzbxxyzz
+Question 2: Next password?
+Answer: vzcaabcc
+Time elapsed: 2.3174855709075928 s
+
+
+Day 12
+Question 1: Sum of all numbers?
+Answer: 111754
+Question 2: Sum of all numbers (igonring red)?
+Answer: 65402
+Time elapsed: 0.018502235412597656 s
+
+
+Day 13
+Question 1: Total change in happiness for the optimal seating arrangement?
+Answer: 664
+Arrangements: [('Alice', 'Bob', 'George', 'Eric', 'Frank', 'Carol', 'Mallory', 'David'), ('Alice', 'David', 'Mallory', 'Carol', 'Frank', 'Eric', 'George', 'Bob'), ('Bob', 'Alice', 'David', 'Mallory', 'Carol', 'Frank', 'Eric', 'George'), ('Bob', 'George', 'Eric', 'Frank', 'Carol', 'Mallory', 'David', 'Alice'), ('Carol', 'Frank', 'Eric', 'George', 'Bob', 'Alice', 'David', 'Mallory'), ('Carol', 'Mallory', 'David', 'Alice', 'Bob', 'George', 'Eric', 'Frank'), ('David', 'Alice', 'Bob', 'George', 'Eric', 'Frank', 'Carol', 'Mallory'), ('David', 'Mallory', 'Carol', 'Frank', 'Eric', 'George', 'Bob', 'Alice'), ('Eric', 'Frank', 'Carol', 'Mallory', 'David', 'Alice', 
+'Bob', 'George'), ('Eric', 'George', 'Bob', 'Alice', 'David', 'Mallory', 'Carol', 'Frank'), ('Frank', 'Carol', 'Mallory', 'David', 'Alice', 'Bob', 'George', 'Eric'), ('Frank', 'Eric', 'George', 'Bob', 'Alice', 'David', 'Mallory', 'Carol'), ('George', 'Bob', 'Alice', 'David', 'Mallory', 'Carol', 'Frank', 'Eric'), ('George', 'Eric', 'Frank', 'Carol', 'Mallory', 'David', 'Alice', 'Bob'), ('Mallory', 'Carol', 'Frank', 'Eric', 'George', 'Bob', 'Alice', 'David'), ('Mallory', 'David', 'Alice', 'Bob', 'George', 'Eric', 'Frank', 'Carol')]
+Question 2: Total change in happiness for the optimal seating arrangement (including myself)?
+Answer: 640
+Arrangements: [('Alice', 'Bob', 'George', 'Eric', 'Frank', 'me', 'Carol', 'Mallory', 'David'), ('Alice', 'David', 'Mallory', 'Carol', 'me', 'Frank', 'Eric', 'George', 'Bob'), ('Bob', 'Alice', 'David', 'Mallory', 'Carol', 
+'me', 'Frank', 'Eric', 'George'), ('Bob', 'George', 'Eric', 'Frank', 'me', 'Carol', 'Mallory', 'David', 'Alice'), ('Carol', 'Mallory', 'David', 'Alice', 'Bob', 'George', 'Eric', 'Frank', 'me'), ('Carol', 'me', 'Frank', 'Eric', 'George', 'Bob', 'Alice', 'David', 'Mallory'), ('David', 'Alice', 'Bob', 'George', 'Eric', 'Frank', 'me', 'Carol', 'Mallory'), ('David', 'Mallory', 'Carol', 'me', 'Frank', 'Eric', 'George', 'Bob', 'Alice'), ('Eric', 'Frank', 'me', 'Carol', 'Mallory', 'David', 'Alice', 'Bob', 'George'), ('Eric', 'George', 'Bob', 'Alice', 'David', 'Mallory', 'Carol', 'me', 'Frank'), ('Frank', 'Eric', 'George', 'Bob', 'Alice', 'David', 'Mallory', 'Carol', 'me'), ('Frank', 'me', 'Carol', 'Mallory', 'David', 'Alice', 'Bob', 'George', 'Eric'), ('George', 'Bob', 'Alice', 'David', 'Mallory', 'Carol', 'me', 'Frank', 'Eric'), ('George', 'Eric', 'Frank', 'me', 'Carol', 'Mallory', 'David', 'Alice', 'Bob'), ('Mallory', 'Carol', 'me', 'Frank', 'Eric', 'George', 'Bob', 'Alice', 'David'), ('Mallory', 'David', 'Alice', 'Bob', 'George', 'Eric', 'Frank', 'me', 'Carol'), ('me', 'Carol', 'Mallory', 'David', 'Alice', 'Bob', 'George', 'Eric', 'Frank'), ('me', 'Frank', 'Eric', 'George', 'Bob', 'Alice', 'David', 'Mallory', 'Carol')]
+Time elapsed: 1.216900110244751 s
+
+
+Day 14
+Question 1: Distance the winning reindeer traveled after exactly 2503 seconds?
+Answer: 2696
+Question 2: Points the winning reindeer has after exactly 2503 seconds?
+Answer: 1084
+Time elapsed: 0.004990339279174805 s
+
+
+Day 15
+Question 1: Total score of the highest-scoring cookie (ignoring calories)?
+Answer: 222870
+Question 2: Total score of the highest-scoring cookie (with 500 calories)?
+Answer: 117936
+Time elapsed: 27.264931201934814 s
+
+
+Day 16
+Question 1: What is the number of the Sue that got you the gift?
+Answer: Sue 40
+Question 2: What is the number of the real Sue?
+Answer: Sue 241
+Time elapsed: 0.00298309326171875 s
+
+
+Day 17
+Question 1: How many different combinations of containers can exactly fit all 150 liters of eggnog?
+Answer: 654
+Question 2: How many different combinations of containers can exactly fit all 150 liters of eggnog (with minimum numbers of containers?
+Answer: 57
+Time elapsed: 0.3741950988769531 s
+
+
+Day 18
+Question 1: How many lights are on after 100 steps?
+Answer: 1061
+Question 2: How many lights are on after 100 steps (with lights stuck on)?
+Answer: 1006
+Time elapsed: 1.4902997016906738 s
+
+
+Day 19
+Question 1: How many distinct molecules can be created after all the different ways you can do one replacement on the medicine molecule?
+Answer: 535
+Question 2: What is the fewest number of steps to go from e to the medicine molecule?
+Answer: 212
+Time elapsed: 0.002986907958984375 s
+
+
+Day 20
+Question 1: What is the lowest house number of the house to get at least as many presents as the number in your puzzle input?
+Answer: 786240
+sum of divisors: 3413760
+Question 2: What is the new lowest house number of the house to get at least as many presents as the number in your puzzle input?
+Answer: 831600
+Number of presents: 35780206
+Time elapsed: 26.008418798446655 s
+
+
+Day 21
+Question 1: What is the least amount of gold you can spend and still win the fight?
+Answer: 111
+Question 2: What is the most amount of gold you can spend and still lose the fight?
+Answer: 188
+Time elapsed: 0.015996456146240234 s
+
+
+Day 22:
+Question 1: What is the least amount of mana you can spend and still win the fight?
+Answer: 1824
+Question 2: What is the least amount of mana you can spend and still win the fight (in hard mode)?
+Answer: 1937
+Time elapsed: 15.947471141815186 s
+
+
+Day 23
+Question 1: What is the value in register b when the program is finished executing?
+Answer: 184
+Question 2: What is the value in register b after the program is finished executing if register a starts as 1 instead?
+Answer: 231
+Time elapsed: 0.01468968391418457 s
+
+
+Day 24
+Question 1: What is the quantum entanglement of the first group of packages in the ideal configuration?
+len(sleighs): 417649
+Answer: 11846773891
+Question 2: What is the quantum entanglement of the first group of packages in the ideal configuration?
+len(sleighs): 102453
+Answer: 80393059
+Time elapsed: 73.63175106048584 s
+
+Day 25
+Question:What code do you give the machine?
+Answer: 2650453
+Time elapsed: 3.5441577434539795 s
+

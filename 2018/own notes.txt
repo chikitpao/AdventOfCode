@@ -1,0 +1,265 @@
+Day 1:
+Question 1: Starting with a frequency of zero, what is the resulting frequency after all of the changes in frequency have been applied?
+Answer: 411
+Question 2: What is the first frequency your device reaches twice?
+Answer: 56360
+
+
+Day 2:
+Question 1: What is the checksum for your list of box IDs?
+Answer: 5880
+Question 2: What letters are common between the two correct box IDs?
+Answer: tiwcdpbseqhxryfmgkvjujvza
+
+
+Day 3:
+Question 1: How many square inches of fabric are within two or more claims?
+## timeElapsed (Pos): 86
+## timeElapsed (String): 144
+## Answer with position strings: 121259
+Answer: 121259
+
+
+Day 3:
+Question 1: How many square inches of fabric are within two or more claims?
+## timeElapsed (Pos): 72
+## timeElapsed (String): 124
+## Answer with position strings: 121259
+Answer: 121259
+Question 2: What is the ID of the only claim that doesn't overlap?
+Answer: 239
+
+
+Day 4:
+Question 1: What is the ID of the guard you chose multiplied by the minute you chose?
+Answer: 84636
+Question 2: What is the ID of the guard you chose multiplied by the minute you chose?
+Answer: 91679
+
+
+Day 5:
+Question 1: How many units remain after fully reacting the polymer you scanned?
+Answer: 11814
+Question 2: What is the length of the shortest polymer you can produce by removing all units of exactly one type and fully reacting the result?
+Answer: 4282
+
+
+Day 6:
+Question 1: What is the size of the largest area that isn't infinite?
+Answer: 4233
+Question 2: What is the size of the region containing all locations which have a total distance to all given coordinates of less than 10000?
+Answer: 45290
+
+
+Day 7:
+Question 1: In what order should the steps in your instructions be completed?
+## Steps with no predecessors: 1
+Answer: SCLPAMQVUWNHODRTGYKBJEFXZI
+Question 2: With 5 workers and the 60+ second step durations described above, how long will it take to complete all of the steps?
+## Process S at time stamp 0
+## Step S finishes at time stamp 79
+## Process C at time stamp 79
+## Step C finishes at time stamp 142
+## Process L at time stamp 142
+## Process P at time stamp 142
+## Step L finishes at time stamp 214
+## Process V at time stamp 214
+## Process W at time stamp 214
+## Step P finishes at time stamp 218
+## Process A at time stamp 218
+## Process M at time stamp 218
+## Process Q at time stamp 218
+## Step A finishes at time stamp 279
+## Process Y at time stamp 279
+## Step M finishes at time stamp 291
+## Step Q finishes at time stamp 295
+## Step V finishes at time stamp 296
+## Process U at time stamp 296
+## Step W finishes at time stamp 297
+## Process N at time stamp 297
+## Step Y finishes at time stamp 364
+## Step N finishes at time stamp 371
+## Process H at time stamp 371
+## Step U finishes at time stamp 377
+## Step H finishes at time stamp 439
+## Process O at time stamp 439
+## Step O finishes at time stamp 514
+## Process D at time stamp 514
+## Process T at time stamp 514
+## Step D finishes at time stamp 578
+## Process R at time stamp 578
+## Step T finishes at time stamp 594
+## Process G at time stamp 594
+## Step R finishes at time stamp 656
+## Step G finishes at time stamp 661
+## Process K at time stamp 661
+## Step K finishes at time stamp 732
+## Process B at time stamp 732
+## Step B finishes at time stamp 794
+## Process J at time stamp 794
+## Step J finishes at time stamp 864
+## Process E at time stamp 864
+## Step E finishes at time stamp 929
+## Process F at time stamp 929
+## Step F finishes at time stamp 995
+## Process X at time stamp 995
+## Step X finishes at time stamp 1079
+## Process Z at time stamp 1079
+## Step Z finishes at time stamp 1165
+## Process I at time stamp 1165
+## Step I finishes at time stamp 1234
+Answer: 1234
+
+
+Day 8:
+Question 1: What is the sum of all metadata entries?
+Answer: 41926
+Question 2: What is the value of the root node?
+Answer: 24262
+
+
+Day 9:
+Question 1: What is the winning Elf's score?
+Answer: 408679
+Question 2: What would the new winning Elf's score be if the number of the last marble were 100 times larger?
+Answer: 3443939356
+
+
+Day 10:
+Question 1: What message will eventually appear in the sky?
+Answer: 
+## minBoundingBoxFrame 10812 minboundingBoxSize 620 width 62 height 10
+>>######  #####    ####   #    #  #         ##       ###  #     
+>>#       #    #  #    #  #    #  #        #  #       #   #     
+>>#       #    #  #        #  #   #       #    #      #   #     
+>>#       #    #  #        #  #   #       #    #      #   #     
+>>#####   #####   #         ##    #       #    #      #   #     
+>>#       #  #    #         ##    #       ######      #   #     
+>>#       #   #   #        #  #   #       #    #      #   #     
+>>#       #   #   #        #  #   #       #    #  #   #   #     
+>>#       #    #  #    #  #    #  #       #    #  #   #   #     
+>>######  #    #   ####   #    #  ######  #    #   ###    ######
+// Answer 1: ERCXLAJL
+Question 2: Exactly how many seconds would they have needed to wait for that message to appear?
+// Answer 2: 10813
+
+
+Day 11:
+Question 1: What is the X,Y coordinate of the top-left fuel cell of the 3x3 square with the largest total power?
+Answer: 21,37
+Question 2: What is the X,Y,size identifier of the square with the largest total power?
+Answer: 236,146,12
+
+
+Day 12:
+...## #
+.#... #
+##... #
+Question 1: After 20 generations, what is the sum of the numbers of all pots which contain a plant?
+Answer: 1987
+Question 2: After fifty billion (50000000000) generations, what is the sum of the numbers of all pots which contain a plant?
+## Initial: sum 1997
+## i 0l: sum 1708 delta -289
+## i 161l: sum 4084 delta -318
+## i 162l: sum 4107 delta 23
+...
+## i 998l: sum 23335 delta 23
+## i 999l: sum 23358 delta 23
+Answer: 1150000000358
+
+
+Day 13:
+Question 1: Where is the location of the first crash?
+Answer: 102,114
+Question 2: What is the location of the last cart at the end of the first tick where it is the only cart left?
+Answer: 146,87
+
+
+Day 14:
+Question 1: What are the scores of the ten recipes immediately after the number of recipes in your puzzle input?
+Answer: 9315164154
+Question 2: How many recipes appear on the scoreboard to the left of the score sequence in your puzzle input?
+Answer: 20231866
+
+
+Day 15:
+Question 1: What is the outcome of the combat described in your puzzle input?
+Answer: 218272
+Question 2: After increasing the Elves' attack power until it is just barely enough for them to win without any Elves dying, what is the outcome of the combat described in your puzzle input?
+Answer: 40861
+
+
+Day 16:
+Question 1: Ignoring the opcode numbers, how many samples in your puzzle input behave like three or more opcodes?
+Answer: 563
+Question 2: What value is contained in register 0 after executing the test program?
+Answer: 629
+
+
+Day 17:
+Question 1: How many tiles can the water reach within the range of y values in your scan?
+Answer: 27736
+Question 2: How many water tiles are left after the water spring stops producing water and all remaining water not at rest has drained?
+Answer: 22474
+
+
+Day 18:
+Question 1: What will the total resource value of the lumber collection area be after 10 minutes?
+Answer: 543312
+Question 2: What will the total resource value of the lumber collection area be after 1000000000 minutes?
+## End of 500 successive duplications: (TreeCount 596 and lumberyardCount 334) after minute 906 and minute 934
+Answer: 199064
+
+
+Day 19:
+Question 1: What value is left in register 0 when the background process halts?
+Answer: 1922
+Question 2: What value is left in register 0 when this new background process halts?
+Answer: 22302144
+
+
+Day 20:
+Question 1: What is the largest number of doors you would be required to pass through to reach a room?
+Answer: 3806
+Question 2: How many rooms have a shortest path from your current location that pass through at least 1000 doors?
+Answer: 8354
+
+
+Day 21:
+Question 1: What is the lowest non-negative integer value for register 0 that causes the program to halt after executing the fewest instructions?
+r[1] 11285115
+Answer: 11285115
+Question 2: What is the lowest non-negative integer value for register 0 that causes the program to halt after executing the most instructions?
+Answer: 2947113
+
+
+Day 22:
+Question 1: What is the total risk level for the smallest rectangle that includes 0,0 and the target's coordinates?
+Answer: 8735
+Question 2: What is the fewest number of minutes you can take to reach the target?
+Answer: 984
+## timeElapsed: 169745
+
+
+Day 23:
+Question 1: Find the nanobot with the largest signal radius. How many nanobots are in range of its signals?
+Answer: 499
+Question 2: Find the coordinates that are in range of the largest number of nanobots. What is the shortest manhattan distance between any of those points and 0,0,0?
+## index 0 min -211915514 max 264380721
+## index 1 min -284459723 max 208522400
+## index 2 min -164183940 max 194089849
+Answer: 80162663
+
+
+Day 24:
+## Answer 1 of test input: 5216
+## Answer 2 of test input: 51
+Question 1: As it stands now, how many units would the winning army have?
+Answer: 26343
+Question 2: How many units does the immune system have left after getting the smallest boost it needs to win?
+Answer: 5549
+
+
+Day 25:
+Question: How many constellations are formed by the fixed points in spacetime?
+Answer: 331

@@ -1,0 +1,171 @@
+Day 1:
+Question 1: What is the solution to your captcha?
+Answer: 1341
+Question 2: What is the solution to your new captcha?
+Answer: 1348
+
+
+Day 2:
+Question 1: What is the checksum for the spreadsheet in your puzzle input?
+Answer: 51139
+Question 2: What is the sum of each row's result in your puzzle input?
+Answer: 272
+
+
+Day 3:
+Question 1: How many steps are required to carry the data from the square identified in your puzzle input all the way to the access port?
+Answer: 438
+Question 2: What is the first value written that is larger than your puzzle input?
+Answer: 266330
+
+
+Day 4:
+Question 1: The system's full passphrase list is available as your puzzle input. How many passphrases are valid?
+Answer: 451
+Question 2: How many passphrases are valid under the new system policy?
+Answer: 223
+
+
+Day 5:
+Question 1: How many steps does it take to reach the exit?
+Answer: 358309
+Question 2: How many steps does it now take to reach the exit?
+Answer: 28178177
+
+
+Day 6:
+Question 1: Given the initial block counts in your puzzle input, how many redistribution cycles must be completed before a configuration is produced that has been seen before?
+Answer: 6681
+Question 2: How many cycles are in the infinite loop that arises from the configuration in your puzzle input?
+Answer: 2392
+
+
+Day 7:
+Question 1: What is the name of the bottom program?
+Answer: dtacyn
+Question 2: Given that exactly one program is the wrong weight, what would its weight need to be to balance the entire tower?
+## nieyygi has children with wrong weight!
+## 0 name: ptshtrn weight: 526 weight: 1122
+## 1 name: mxgpbvf weight: 52 weight: 1117
+## 2 name: cfqdsb weight: 556 weight: 1117
+## 3 name: yfejqb weight: 493 weight: 1117
+
+
+Day 8:
+Question 1: What is the largest value in any register after completing the instructions in your puzzle input?
+Answer: 6012
+Question 2: What is the highest value held in any register during this process?
+Answer: 6369
+
+
+Day 9:
+Question 1: What is the total score for all groups in your input?
+Answer: 9662
+Question 2: How many non-canceled characters are within the garbage in your puzzle input?
+Answer: 4903
+
+
+Day 10:
+Question 1: What is the result of multiplying the first two numbers in the list?
+Answer: 40132
+Question 2: Treating your puzzle input as a string of ASCII characters, what is the Knot Hash of your puzzle input?
+Answer: 35b028fe2c958793f7d5a61d07a008c8
+
+
+Day 11:
+Question 1: How many steps are required to reach the child process?
+Answer: (-416,-626) => 834 steps
+Question 2: How many steps away is the furthest he ever got from his starting position?
+Answer: 1569 steps
+
+
+Day 13:
+Question 1: How many programs are in the group that contains program ID 0?
+Answer: 1316 (6 violations)
+Question 2: What is the fewest number of picoseconds that you need to delay the packet to pass through the firewall without being caught?
+Answer: 3840052
+
+
+Day 14:
+Question 1: Given your actual key string, how many squares are used?
+Answer: 8216
+Question 2: How many regions are present given your key string?
+Answer: 1139
+
+
+Day 15:
+Question 1: After 40 million pairs, what is the judge's final count?
+Answer: 597
+Question 2: After 5 million pairs, but using this new generator logic, what is the judge's final count?
+Answer: 303
+
+
+Day 16:
+Question 1: In what order are the programs standing after their dance?
+Answer: cknmidebghlajpfo
+Question 2: In what order are the programs standing after their billion dances?
+## i 59 identical with entry 0
+Answer: cbolhmkgfpenidaj
+
+
+Day 17:
+Question 1: What is the value after 2017 in your completed circular buffer?
+Answer: 808
+Question 2: What is the value after 0 the moment 50000000 is inserted?
+Answer: 47465686
+
+
+Day 18:
+Question 1: What is the value of the recovered frequency (the value of the most recently played sound) the first time a rcv instruction is executed with a non-zero value?
+Answer: Recovers frequency of last sound played: 7071.
+Question 2: Once both of your programs have terminated (regardless of what caused them to do so), how many times did program 1 send a value?
+Answer: sendCount of program 1: 8001
+
+
+Day 19:
+Question 1: What letters will the network packet see (in the order it would see them) if it follows the path?
+Answer: GSXDIPWTU
+Question 2: How many steps does the packet need to go?
+Answer: 16100
+
+
+Day 20:
+Question 1: Which particle will stay closest to position <0,0,0> in the long term?
+Acceleration count: 1
+Answer: 376
+Question 2: How many particles are left after all collisions are resolved?
+Answer: 574
+
+
+Day 21:
+Question 1: How many pixels stay on after 5 iterations?
+Answer: 158
+Question 2: How many pixels stay on after 18 iterations?
+Answer: 2301762
+
+
+Day 22:
+Question 1: Given your actual map, after 10000 bursts of activity, how many bursts cause a node to become infected?
+Answer: 5330
+Question 2: Given your actual map, after 10000000 bursts of activity, how many bursts cause a node to become infected?
+Answer: 2512103
+
+
+Day 23:
+Question 1: How many times is the mul instruction invoked?
+Answer: 4225
+Question 2: After setting register a to 1, if the program were to run to completion, what value would be left in register h?
+Answer: 905
+
+
+Day 24:
+Question 1: What is the strength of the strongest bridge you can make with the components you have available?
+Answer: 1511
+Question 2: What is the strength of the longest bridge you can make?
+Answer: 1471
+
+
+Day 25:
+Question: What is the diagnostic checksum it produces once it's working again?
+Answer: 4230
+

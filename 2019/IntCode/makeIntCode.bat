@@ -110,8 +110,10 @@ if %startProgram% LEQ 21 Day21.exe
 @REM Question 2: What amount of hull damage does the springdroid now report?
 @REM Answer 2: 1143351187
 
-@REM ghc --make Day23.hs
-@REM if %startProgram% LEQ 23 Day23.exe
+ghc --make Day23.hs
+if %startProgram% LEQ 23 Day23.exe
+@REM "Question 1: What is the Y value of the first packet sent to "
+@REM " address 255?"
 
 ghc --make Day25.hs
 if %startProgram% LEQ 25 Day25.exe

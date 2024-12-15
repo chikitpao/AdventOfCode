@@ -1,0 +1,322 @@
+Day 1
+
+Question 1: How many blocks away is Easter Bunny HQ?
+
+Answer: 161
+
+Question 2: How many blocks away is the first location you visit twice?
+
+Answer: 110
+
+
+Day 2
+
+Question 1: What is the bathroom code?
+
+Answer: 61529
+
+Question 2: Using the same instructions in your puzzle input, what is the correct bathroom code?
+
+Answer: C2C28
+
+
+Day 3
+
+Question 1: In your puzzle input, how many of the listed triangles are possible?
+
+Answer: 869
+
+Question 2: In your puzzle input, and instead reading by columns, how many of the listed triangles are possible?
+
+Answer: 1544
+
+
+Day 4
+
+Question 1: What is the sum of the sector IDs of the real rooms?
+
+Answer: 409147
+
+Question 2: What is the sector ID of the room where North Pole objects are stored?
+
+Answer: 991
+
+
+Day 5 (Python)
+Question 1: Given the actual Door ID, what is the password?
+Answer: f77a0e6e
+Question 2: Given the actual Door ID and this new method, what is the password?
+Answer: 999828ec
+Time elapsed: 56.74828910827637 s
+(Node.js)
+Day 5
+app.js:70
+Question 1: Given the actual Door ID, what is the password?
+app.js:70
+Answer: f77a0e6e
+app.js:70
+Question 2: Given the actual Door ID and this new method, what is the password?
+app.js:70
+Answer: 999828ec
+app.js:70
+Execution time: 86175 ms
+
+
+Day 6
+
+Question 1: Given the recording in your puzzle input, what is the error-corrected version of the message being sent?
+
+Answer: qrqlznrl
+
+Question 2: Given the recording in your puzzle input and this new decoding methodology, what is the original message that Santa is trying to send?
+
+Answer: kgzdfaon
+
+
+Day 7
+
+Question 1: How many IPs in your puzzle input support TLS?
+
+Answer: 115
+
+Question 2: How many IPs in your puzzle input support SSL?
+
+Answer: 231
+
+
+Day 8
+
+Question 1: There seems to be an intermediate check of the voltage used by the display: after you swipe your card, if the screen did work, how many pixels should be lit?
+
+Answer: 115
+
+Question 2: After you swipe your card, what code is the screen trying to display?
+
+Answer:
+
+#### #### #### #   ##  # #### ###  ####  ###   ## 
+
+#    #    #    #   ## #  #    #  # #      #     # 
+
+###  ###  ###   # # ##   ###  #  # ###    #     # 
+
+#    #    #      #  # #  #    ###  #      #     # 
+
+#    #    #      #  # #  #    # #  #      #  #  # 
+
+#### #    ####   #  #  # #    #  # #     ###  ##  
+(Debug output)
+#### #### #### #   ##  # #### ###  ####  ###   ## 
+#    #    #    #   ## #  #    #  # #      #     # 
+###  ###  ###   # # ##   ###  #  # ###    #     # 
+#    #    #      #  # #  #    ###  #      #     # 
+#    #    #      #  # #  #    # #  #      #  #  # 
+#### #    ####   #  #  # #    #  # #     ###  ##  
+
+
+Day 9
+
+Question 1: What is the decompressed length of the file (your puzzle input)?
+
+Answer: 110346
+
+Question 2: What is the decompressed length of the file using this improved format?
+
+Answer: 10774309173
+
+
+Day 10
+
+Question 1: Based on your instructions, what is the number of the bot that is responsible for comparing value-61 microchips with value-17 microchips?
+
+Answer: Bot with number 157
+
+Question 2: What do you get if you multiply together the values of one chip in each of outputs 0, 1, and 2?
+
+Answer: 1085
+
+
+Day 11
+
+Question 1: In your situation, what is the minimum number of steps required to bring all of the objects to the fourth floor?
+
+Answer: 47
+
+Question 2: What is the minimum number of steps required to bring all of the objects, including these four new ones, to the fourth floor?
+
+Answer: 71
+
+Execution time: 117 ms
+
+
+Day 12
+
+Question 1: After executing the assembunny code in your puzzle input, what value is left in register a?
+
+Answer: 318020
+
+Question 2: If you instead initialize register c to be 1, what value is now left in register a?
+
+Answer: 9227674
+
+
+Day 13
+
+Question 1: What is the fewest number of steps required for you to reach 31,39?
+
+Answer: 96
+
+Question 2: How many locations (distinct x,y coordinates, including your starting location) can you reach in at most 50 steps?
+
+Answer: 141
+
+Execution time: 9 ms
+
+
+(Node.js)
+Day 14
+app.js:139
+Question 1: Given the actual salt in your puzzle input, what index produces your 64th one-time pad key?
+app.js:139
+Answer: 23769
+app.js:139
+Question 2: Given the actual salt in your puzzle input and using 2016 extra MD5 calls of key stretching, what index now produces your 64th one-time pad key?
+app.js:139
+Answer: 20606
+app.js:139
+Execution time: 99458 ms
+
+
+Day 15
+
+Question 1: What is the first time you can press the button to get a capsule?
+
+Answer: 376777
+
+Question 2: With this new disc, and counting again starting from time=0 with the configuration in your puzzle input, what is the first time you can press the button to get another capsule?
+
+Answer: 3903937
+
+
+Day 16
+
+Question 1: The first disk you have to fill has length 272. Using the initial state in your puzzle input, what is the correct checksum?
+
+Answer: 11111000111110000
+
+Question 2: The second disk you have to fill has length 35651584. Again using the initial state in your puzzle input, what is the correct checksum for this disk?
+
+Answer: 10111100110110100
+
+Execution time: 3248 ms
+
+
+Day 17
+app.js:31
+Question 1: Given your vault's passcode, what is the shortest path (the actual path, not just the length) to reach the vault?
+app.js:31
+Answer: DUDRDLRRRD
+app.js:31
+Execution time: 3 ms
+app.js:31
+Question 2: What is the length of the longest path that reaches the vault?
+app.js:31
+Answer: 502
+app.js:31
+Execution time: 220 ms
+
+
+Day 18
+
+Question 1: Starting with the map in your puzzle input, in a total of 40 rows (including the starting row), how many safe tiles are there?
+
+Answer: 2005
+
+Question 2: How many safe tiles are there in a total of 400000 rows?
+
+Answer: 20008491
+
+Execution time for Answer 2 (stupid counting): 3211 ms
+
+Question 2: How many safe tiles are there in a total of 400000 rows?
+
+Answer: 20008491
+
+Execution time for Answer 2 (find cycle): 3490 ms
+
+
+Day 19
+
+Question 1: With the number of Elves given in your puzzle input, which Elf gets all the presents?
+
+Answer: 1830117
+
+Question 2: With the number of Elves given in your puzzle input, which Elf now gets all the presents?
+
+Answer: 1417887
+
+
+Day 20
+
+Question 1: Given the list of blocked IPs you retrieved from the firewall (your puzzle input), what is the lowest-valued IP that is not blocked?
+
+Answer: 4793564
+
+Question 2: How many IPs are allowed by the blacklist?
+
+Answer: 146
+
+
+Day 21
+
+Question 1: Given the list of scrambling operations in your puzzle input, what is the result of scrambling abcdefgh?
+
+Answer: fdhbcgea
+
+Question 2: What is the un-scrambled version of the scrambled password fbgdceah?
+
+Answer: egfbcadh
+
+
+Day 22
+
+Question 1: How many viable pairs of nodes are there?
+
+Answer: 872
+
+Question 2: What is the fewest number of steps required to move your goal data to node-x0-y0?
+
+Answer: 211
+
+
+Day 23
+
+Question 1: After executing the assembunny code in your puzzle input, what value is left in register a?
+
+Answer: 12860
+
+Question 2: What value should actually be sent to the safe?
+
+Answer: 479009420
+
+
+Day 24
+
+Question 1: Given your actual map, and starting from location 0, what is the fewest number of steps required to visit every non-0 number marked on the map at least once?
+
+ShortestRoutes: 0,2,1,6,3,7,5,4
+
+Answer: 474
+
+Question 2: What is the fewest number of steps required to start at 0, visit every non-0 number marked on the map at least once, and then return to 0?
+
+ShortestRoutes: 0,2,1,7,4,5,3,6,0
+
+Answer: 696
+
+
+Day 25
+
+Question 1: What is the lowest positive integer that can be used to initialize register a and cause the code to output a clock signal of 0, 1, 0, 1... repeating forever?
+
+Answer: 180
