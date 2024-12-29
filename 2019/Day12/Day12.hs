@@ -4,6 +4,7 @@
 
 import Data.Char (isDigit)
 import Data.List (transpose)
+import qualified Data.Set as Set
 
 data Moon  = Moon {   x :: Int
                     , y :: Int
@@ -50,6 +51,42 @@ part1 ml =
         kins = map kin newMl in
     sum $ zipWith (*) pots kins
 
+data Axis = Axis { pos1 :: Int
+                , pos2 :: Int
+                , pos3 :: Int
+                , pos4 :: Int
+                , velo1 :: Int
+                , velo2 :: Int
+                , velo3 :: Int
+                , velo4 :: Int
+            } deriving (Show)
+
+instance Eq Axis where
+    Axis pos11 pos21 pos31 pos41 velo11 velo21 velo31 velo41 == Axis pos12 pos22 pos32 pos42 velo12 velo22 velo32 velo42 = pos11 == pos12 && pos21 == pos22 && pos31 == pos32 && pos41 == pos42 && velo11 == velo12 && velo21 == velo22 && velo31 == velo32 && velo41 == velo42
+
+getAxis :: [Moon] -> Int -> Axis
+getAxis ml axis = 
+    case axis of
+        1 -> Axis (x (head ml)) (x (ml !! 1)) (x (ml !! 2)) (x (ml !! 3)) (vx (head ml)) (vx (ml !! 1)) (vx (ml !! 2)) (vx (ml !! 3))
+        2 -> Axis (y (head ml)) (y (ml !! 1)) (y (ml !! 2)) (y (ml !! 3)) (vy (head ml)) (vy (ml !! 1)) (vy (ml !! 2)) (vy (ml !! 3))
+        _ -> Axis (z (head ml)) (z (ml !! 1)) (z (ml !! 2)) (z (ml !! 3)) (vz (head ml)) (vz (ml !! 1)) (vz (ml !! 2)) (vz (ml !! 3))
+
+moveMoons2 :: [Moon] -> Set.Set String -> Int -> Int -> Int
+moveMoons2 ml set axis previousStep =
+    let currentStep = previousStep + 1
+        newMl = [step ml m | m <- ml] 
+        newAxisStr = show $ getAxis newMl axis  -- inefficient and dirty hack to convert Axis to String
+        isMember = Set.member newAxisStr set 
+        newSet = Set.insert newAxisStr set in
+    if isMember
+    then currentStep
+    else moveMoons2 newMl newSet axis currentStep
+
+part2 :: [Moon] -> Int -> Int
+part2 ml axis = 
+    let set = Set.singleton (show $ getAxis ml axis) in  -- inefficient and dirty hack to convert Axis to String
+    moveMoons2 ml set axis 0
+
 main :: IO ()
 main = do
     -- Example input:
@@ -59,5 +96,8 @@ main = do
     
     putStrLn "Question 1: What is the total energy in the system after simulating the moons given in your scan for 1000 steps?"
     print $ part1 ml
+    putStrLn "Question 2: How many steps does it take to reach the first state that exactly matches a previous state?"
+    print $ lcm (lcm (part2 ml 0) (part2 ml 1)) (part2 ml 2)
 
 -- Answer 1: 12351
+-- Answer 2: 380635029877596
