@@ -61,9 +61,6 @@ data Axis = Axis { pos1 :: Int
                 , velo4 :: Int
             } deriving (Show)
 
-instance Eq Axis where
-    Axis pos11 pos21 pos31 pos41 velo11 velo21 velo31 velo41 == Axis pos12 pos22 pos32 pos42 velo12 velo22 velo32 velo42 = pos11 == pos12 && pos21 == pos22 && pos31 == pos32 && pos41 == pos42 && velo11 == velo12 && velo21 == velo22 && velo31 == velo32 && velo41 == velo42
-
 getAxis :: [Moon] -> Int -> Axis
 getAxis ml axis = 
     case axis of
