@@ -13,6 +13,7 @@ calcFuel2 x
     | x <= 0 = 0
     | otherwise = calcFuel x + calcFuel2 (calcFuel x)
 
+main :: IO ()
 main = do
     masses <- map read . lines <$> readFile "Day01_input.txt" :: IO [Integer]
     putStrLn "Question 1: What is the sum of the fuel requirements for all of the modules on your spacecraft?"

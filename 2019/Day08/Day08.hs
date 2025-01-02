@@ -4,12 +4,13 @@
 
 
 import Control.Exception (assert)
-import Data.List (minimumBy, transpose, intercalate)
+import Data.List (minimumBy, transpose)
 
 -- end is exclusive
 slice :: [Char] -> Int -> Int -> [Char]
 slice text start end = take (end - start) (drop start text)
 
+count :: Eq a => a -> [a] -> Int
 count x = length . filter (x==)
 
 part1 :: [[Char]] -> Int
@@ -19,11 +20,13 @@ part1 layers =
         t2 = minimumBy f temp in
     (t2 !! 1) * (t2 !! 2)
 
+transformPixel :: [Char] -> Char
 transformPixel pixels = 
     let pixel = head $ dropWhile (=='2') pixels in
     case pixel of
         '0' -> '.'  -- black
         '1' -> '#'  -- white
+        _ -> error "transformPixel: unexpected pixel"
 
 part2 :: [[Char]] -> Int -> Int -> [Char]
 part2 layers width height = 

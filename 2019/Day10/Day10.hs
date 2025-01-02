@@ -3,15 +3,15 @@
 -- Author: Chi-Kit Pao
 
 
-import Control.Exception (assert)
 import Data.Function (on)
-import Data.List (groupBy, maximumBy, sortBy, transpose)
+import Data.List (maximumBy, sortBy, transpose)
 import qualified Data.Map as Map
 import qualified Data.Set as Set
-import Data.Maybe (fromMaybe)
 
+xpos :: (a, b) -> a
 xpos (x, _) = x
-ypos (x, y) = y
+ypos :: (a, b) -> b
+ypos (_, y) = y
 
 getBearing :: (Int, Int) -> (Int, Int) -> ((Int, Int), (Int, Int))
 getBearing s d = 
@@ -54,7 +54,7 @@ getBearing2 s d =
             else result
 
 getDistance  :: (Int, Int) -> (Int, Int) -> Float
-getDistance s d = sqrt $ fromIntegral ((xpos d - xpos s)^2 + (ypos d - ypos s)^2)
+getDistance s d = sqrt $ fromIntegral ((xpos d - xpos s)^(2::Int) + (ypos d - ypos s)^(2::Int) )
 
 data Asteroid  = Asteroid { 
                     bearing :: Float
@@ -77,7 +77,7 @@ addToMap m (x:xs) =
                 m1 = Map.update (\_-> Just newList) key m in
             addToMap m1 xs
 
---part2 :: Set.Set (Int, Int) -> (Int, Int) -> (Int, Int)
+part2 :: Set.Set (Int, Int) -> (Int, Int) -> (Int, Int)
 part2 set stationPos = 
     let al = [ Asteroid (getBearing2 stationPos d) (getDistance stationPos d) (xpos d) (ypos d) | d <- filter (/= stationPos) (Set.toList set)]
         bearingList = Set.toAscList . Set.fromList $ [bearing a | a <- al]

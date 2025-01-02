@@ -2,8 +2,11 @@
 -- AoC 2019 Day 4: Secure Container
 -- Author: Chi-Kit Pao
 
+inputLowerBound :: Int
 inputLowerBound = 347312
+inputUpperBound :: Int
 inputUpperBound = 805915
+range :: [Int]
 range = [inputLowerBound..inputUpperBound]
 
 getDigits :: Int -> [Int]
@@ -36,7 +39,9 @@ checkNumber isPart2 number =
         check3 = not isPart2 || checkPairPart2 pairList in
     check1 && check2 && check3
 
+validNumbers1 :: [Int]
 validNumbers1 = filter (checkNumber False) range
+validNumbers2 :: [Int]
 validNumbers2 = filter (checkNumber True) range
 
 main :: IO ()

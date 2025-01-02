@@ -3,12 +3,9 @@
 -- Author: Chi-Kit Pao
 
 import Control.Exception (assert)
-import Data.List.Split (split, splitOn)
+import Data.List.Split (splitOn)
 import qualified Data.Map as Map
-import qualified Data.Set as Set
 import Data.Maybe (isJust)
-import Data.Binary.Get (isEmpty)
-import Data.Text.Internal.Fusion.Size (upperBound)
 
 data Chemical = Chemical {
                             name :: String
@@ -36,8 +33,7 @@ parseLine line =
 
 addToReactionMap :: Map.Map String Reaction -> [Reaction] -> Map.Map String Reaction
 addToReactionMap m [] = m
-addToReactionMap m (x:xs) = foldl (\ m2 x2 -> Map.insert (name $ output x2) x2 m2) (f x m) xs
-    where f x = Map.insert (name $ output x) x
+addToReactionMap m (x:xs) = foldl (\ m2 x2 -> Map.insert (name $ output x2) x2 m2) (Map.insert (name $ output x) x m) xs
 
 oreForFuel :: Map.Map String Reaction -> Map.Map String Chemical -> (Int, Map.Map String Chemical)
 oreForFuel reactionMap calculationMap = 
@@ -48,7 +44,7 @@ oreForFuel reactionMap calculationMap =
         let key = name $ head required
             amount_ = assert(isJust $ Map.lookup  key calculationMap) amount $ calculationMap Map.! key
             reaction = assert(isJust $ Map.lookup key reactionMap) reactionMap Map.! key
-            reactionRequired = ceiling( fromIntegral amount_ / fromIntegral (amount (output reaction)))
+            reactionRequired = (ceiling :: Double -> Int)(fromIntegral amount_ / fromIntegral (amount (output reaction))) 
             surplus = reactionRequired * amount (output reaction) - amount_
             l = [(name c, amount (Map.findWithDefault (Chemical (name c) 0) (name c) calculationMap) +  amount c * reactionRequired) | c <- inputs reaction]
             cm1 = if surplus == 0 then Map.delete key calculationMap else Map.insert key (Chemical key (-surplus)) calculationMap
@@ -86,7 +82,7 @@ main = do
 
     putStrLn "Question 2: Given 1 trillion ORE, what is the maximum amount of FUEL you can produce?"
     let trillion = 1000000000000::Int
-        (q, r) = divMod trillion answer1
+        q = trillion `div` answer1
         ore_2q = assert(q < trillion) fst $ oreForFuel reactionMap $ Map.singleton "FUEL" (Chemical "FUEL" (2*q))
         answer2 = assert(ore_2q > trillion) binarySearch reactionMap trillion q ore_2q
     print answer2

@@ -4,12 +4,13 @@
 
 --import Data.List
 import Data.List.Split (splitOn)
-import Data.Maybe ( fromJust )
 import qualified Data.Map as Map
-import qualified Data.Set as Set
 
+swap :: (b, a) -> (a, b)
 swap (x,y) = (y,x)
+tuplify2 :: [b] -> (b, b)
 tuplify2 [x,y] = (x,y)
+tuplify2 _ = error "tuplify2: List length is not 2"
 
 countOrbit :: Map.Map [Char] [Char] -> [Char] -> Int
 countOrbit m s =
@@ -37,7 +38,7 @@ main = do
         m = Map.fromList ml
 
     putStrLn "Question 1: What is the total number of direct and indirect orbits in your map data?"
-    print $ sum [countOrbit m a | (a, b) <- ml]
+    print $ sum [countOrbit m a | (a, _) <- ml]
 
     putStrLn "Question 2: What is the minimum number of orbital transfers required to move from the object YOU are orbiting to the object SAN is orbiting?"
     print $ countTransfer m "YOU" "SAN"
