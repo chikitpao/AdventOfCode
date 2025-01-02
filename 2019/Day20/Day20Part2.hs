@@ -1,5 +1,5 @@
--- Day20.hs
--- AoC 2019 Day 20: Donut Maze
+-- Day20Part2.hs
+-- AoC 2019 Day 20: Donut Maze (Part 2)
 -- Author: Chi-Kit Pao
 
 import Control.Exception (assert)
@@ -8,15 +8,21 @@ import Data.Function (on)
 import Data.List (find, findIndex, sortBy)
 import Data.Maybe (fromJust, isJust, isNothing)
 import qualified Data.Map as Map
-import Debug.Trace
+
 
 data State = Unvisited | Visiting | Visited deriving (Enum, Show)
 
 data Pos = Pos {
-                posRow :: Int
+                posLevel :: Int
+                , posRow :: Int
                 , posColumn :: Int
                 } deriving (Show, Eq, Ord)
-
+data Bounds = Bounds {
+                lowerRow :: Int
+                , upperRow :: Int
+                , lowerColumn :: Int
+                , upperColumn :: Int
+                } deriving (Show)
 data Vertice = Vertice {
                     verticePos :: Pos
                     , neighbors :: [Maybe Pos]
@@ -35,22 +41,39 @@ data Maze = Maze {
                 , vertices :: Map.Map Pos Vertice
             }
 
-findNeighbor :: [[Char]] -> Pos -> Maybe (Char, Pos) -> Maybe Pos
-findNeighbor inputLines neighborPos portalExitTile
-    | isUpper ((inputLines !! posRow neighborPos) !! posColumn neighborPos) && isJust portalExitTile = Just $ snd $ fromJust portalExitTile 
-    | isValidTile ((inputLines !! posRow neighborPos) !! posColumn neighborPos) = Just neighborPos
-    | otherwise = Nothing
+findNeighbor2 :: [[Char]] -> Int -> Bounds -> Pos -> Maybe (Char, Pos) -> Maybe Pos
+findNeighbor2 inputLines maxLevel innerPortalBounds neighborPos portalExitTile =
+    -- Block outer portals at level 0.
+    -- Handle connection inner portals of level n with outer portals of level n + 1, also 
+    -- outer portals of level n with inner portals of level n - 1.
+    -- Block inner portals at level maxLevel - 1.
+    let level = posLevel neighborPos
+        row = posRow neighborPos
+        column = posColumn neighborPos
+        isInnerPortalPos = row >= lowerRow innerPortalBounds && row <= upperRow innerPortalBounds && column >= lowerColumn innerPortalBounds && column <= upperColumn innerPortalBounds
+        portalExitLevel
+            | not isInnerPortalPos && row == 0 = Nothing
+            | isInnerPortalPos && level >= maxLevel - 1 = Nothing
+            | isInnerPortalPos = Just (level + 1)
+            | otherwise = Just (level - 1)
+    in
+    if isUpper ((inputLines !! row) !! column) && isJust portalExitLevel && isJust portalExitTile
+        then Just $ Pos (fromJust portalExitLevel) (posRow $ snd $ fromJust portalExitTile) (posColumn $ snd $ fromJust portalExitTile)
+    else if isValidTile ((inputLines !! row) !! column)
+        then Just neighborPos
+    else Nothing
 
-createVertice :: [[Char]] -> [(Char, Pos)] -> Pos -> Vertice
-createVertice inputLines portalTiles pos= 
-    let row = posRow pos
+createVertice2 :: [[Char]] -> Int -> Bounds -> [(Char, Pos)] -> Pos -> Vertice
+createVertice2 inputLines maxLevel innerPortalBounds portalTiles pos = 
+    let level = posLevel pos
+        row = posRow pos
         column = posColumn pos
         c = (inputLines !! row) !! column
-        portalExitTile = if isPortalTile c then find (\(a, b) -> a == c && b /= pos) portalTiles else Nothing
-        northNeighbor = findNeighbor inputLines (Pos (row - 1) column) portalExitTile
-        eastNeighbor = findNeighbor inputLines (Pos row (column + 1)) portalExitTile
-        southNeighbor = findNeighbor inputLines (Pos (row + 1) column) portalExitTile
-        westNeighbor = findNeighbor inputLines (Pos row (column - 1)) portalExitTile in
+        portalExitTile = if isPortalTile c then find (\(a, b) -> a == c && (posRow b /= posRow pos || posColumn b /= posColumn pos)) portalTiles else Nothing
+        northNeighbor = findNeighbor2 inputLines maxLevel innerPortalBounds (Pos level (row - 1) column) portalExitTile
+        eastNeighbor = findNeighbor2 inputLines maxLevel innerPortalBounds (Pos level row (column + 1)) portalExitTile
+        southNeighbor = findNeighbor2 inputLines maxLevel innerPortalBounds (Pos level (row + 1) column) portalExitTile
+        westNeighbor = findNeighbor2 inputLines maxLevel innerPortalBounds (Pos level row (column - 1)) portalExitTile in
     Vertice pos [northNeighbor, eastNeighbor, southNeighbor, westNeighbor]
 
 isPortalTile :: Char -> Bool
@@ -65,14 +88,25 @@ isValidTile tile
     | tile == '.' = True
     | otherwise = False
 
-parseInput :: [[Char]] -> Maze
-parseInput inputLines = 
-    let portalTiles = [ ((inputLines !! row) !! column, Pos row column) | row <- [0..(length inputLines -1)], column <- [0..(length (head inputLines) - 1)]
+calculateInnerPortalBounds :: [[Char]] -> [(Char, Pos)] -> Bounds
+calculateInnerPortalBounds inputLines portalTiles = 
+    let lowerRow_ = minimum [posRow pos | (_, pos) <- portalTiles, let c = (inputLines !! (posRow pos + 1)) !! posColumn pos, isUpper c || c == ' ']
+        upperRow_ = maximum [posRow pos | (_, pos) <- portalTiles, let c = (inputLines !! (posRow pos - 1)) !! posColumn pos, isUpper c || c == ' ']
+        lowerColumn_ = minimum [posColumn pos | (_, pos) <- portalTiles, let c = (inputLines !! posRow pos) !! (posColumn pos + 1), isUpper c || c == ' ']
+        upperColumn_ = maximum [posColumn pos | (_, pos) <- portalTiles, let c = (inputLines !! posRow pos) !! (posColumn pos - 1), isUpper c || c == ' '] in
+    Bounds lowerRow_ upperRow_ lowerColumn_ upperColumn_
+
+parseInput2 :: [[Char]] -> Int -> Maze
+parseInput2 inputLines maxLevel = 
+    let portalTiles = [ ((inputLines !! row) !! column, Pos 0 row column) | row <- [0..(length inputLines -1)], column <- [0..(length (head inputLines) - 1)]
                     , let c = (inputLines !! row) !! column, isPortalTile c ]
+        innerPortalBounds = calculateInnerPortalBounds inputLines portalTiles
         startPos_ = fromJust $ lookup 'a' portalTiles
-        endPos_ = fromJust $ lookup 'z' portalTiles 
-        vertices_ = Map.fromList [ (Pos row column, createVertice inputLines portalTiles (Pos row column))| row <- [0..(length inputLines -1)], column <- [0..(length (head inputLines) - 1)]
-                    , let c = (inputLines !! row) !! column, isValidTile c]
+        endPos_ = fromJust $ lookup 'z' portalTiles
+        vertices_ = Map.fromList [ (Pos level row column, createVertice2 inputLines maxLevel innerPortalBounds portalTiles (Pos level row column))
+                                | row <- [0..(length inputLines -1)], column <- [0..(length (head inputLines) - 1)], 
+                                    let c = (inputLines !! row) !! column, isValidTile c,
+                                    level <- [0..(maxLevel -1)]]
     in
     Maze startPos_ endPos_ vertices_
 
@@ -105,7 +139,6 @@ handleNeighbor neighborPos currentVertice dijkVertices visiting =
                             (dijkVertices', visiting'')
                     else
                         (dijkVertices', visiting)
-                        
 
 findShortestDistance :: Maze -> Map.Map Pos DijkstraVertice -> [DijkstraVertice] -> Float
 findShortestDistance maze dijkVertices visiting =
@@ -126,8 +159,8 @@ findShortestDistance maze dijkVertices visiting =
                     (dijkVertices4, visiting4) = handleNeighbor (neighbors_ !! 3) currentVertice' dijkVertices3 visiting3 in
                 findShortestDistance maze dijkVertices4 visiting4
 
-part1 :: Maze -> Int
-part1 maze = 
+part2 :: Maze -> Int
+part2 maze = 
     let dijkVertices = Map.fromList [ (verticePos v, DijkstraVertice v (read "Infinity") Nothing Unvisited) | v <- Map.elems $ vertices maze]
         startDijkVertice = dijkVertices Map.! startPos maze
         startDijkVertice' = DijkstraVertice (vertice startDijkVertice) 0.0 Nothing Visiting
@@ -144,8 +177,8 @@ main = do
     -- TG -> r, XG -> s, MU -> t, XX -> u, NJ -> v, KX -> w, SO -> x, XH -> y,
     -- IF -> 0, YH -> 1, TF -> 2.
     inputLines <- lines <$> readFile "input_modified.txt"
-    let maze = parseInput inputLines
-    putStrLn "Question 1: How many steps does it take to get from the open tile marked AA to the open tile marked ZZ?"
-    print $ part1 maze
+    let maze = parseInput2 inputLines 50
+    putStrLn "Question 2: When accounting for recursion, how many steps does it take to get from the open tile marked AA to the open tile marked ZZ, both at the outermost layer?"
+    print $ part2 maze
 
--- Answer 1: 476
+-- Answer 2: 5350
