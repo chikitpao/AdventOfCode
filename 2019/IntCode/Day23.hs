@@ -90,8 +90,10 @@ calculateNetwork (computers, result, nat, prevNats) =
         (computers3, _, _) = if isIdle then sendPackets (computers2, [Packet 0 (packetX $ fromJust nat) (packetY $ fromJust nat)], nat) else (computers2, [], nat)
         newPrevNats = if isIdle && isJust nat then updatePrevNats prevNats (fromJust nat) else prevNats
         answer2_ = if isIdle && length newPrevNats == 2 && packetY (head newPrevNats) == packetY (last newPrevNats) then Just (packetY (last newPrevNats)) else Nothing
-        packetIndices = findIndices (\x -> packetDst x == 255) overallOutputQueue -- Assmuded that there is only one packet to 255 in queue. Otherwise the assertion will be triggered.
-        _ = assert(length packetIndices == 1) Nothing  -- assert cannot be before if-then-else?
+         -- Assumed that there is only one packet to 255 in the queue. Otherwise assertion will be triggered.
+        packetIndices = findIndices (\x -> packetDst x == 255) overallOutputQueue
+        -- assert cannot be before if-then-else in the same line?
+        _ = assert(length packetIndices == 1) 0
         packet = if length packetIndices == 1 then Just (overallOutputQueue !! head packetIndices) else Nothing
         newNat = if isJust packet then packet else nat
         packetY_ = if isNothing packet then Nothing else Just $ packetY (fromJust packet)
