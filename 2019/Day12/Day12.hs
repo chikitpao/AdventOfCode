@@ -59,7 +59,7 @@ data Axis = Axis { pos1 :: Int
                 , velo2 :: Int
                 , velo3 :: Int
                 , velo4 :: Int
-            } deriving (Show)
+            } deriving (Show, Eq, Ord)
 
 getAxis :: [Moon] -> Int -> Axis
 getAxis ml axis = 
@@ -68,20 +68,20 @@ getAxis ml axis =
         2 -> Axis (y (head ml)) (y (ml !! 1)) (y (ml !! 2)) (y (ml !! 3)) (vy (head ml)) (vy (ml !! 1)) (vy (ml !! 2)) (vy (ml !! 3))
         _ -> Axis (z (head ml)) (z (ml !! 1)) (z (ml !! 2)) (z (ml !! 3)) (vz (head ml)) (vz (ml !! 1)) (vz (ml !! 2)) (vz (ml !! 3))
 
-moveMoons2 :: [Moon] -> Set.Set String -> Int -> Int -> Int
+moveMoons2 :: [Moon] -> Set.Set Axis -> Int -> Int -> Int
 moveMoons2 ml set axis previousStep =
     let currentStep = previousStep + 1
         newMl = [step ml m | m <- ml] 
-        newAxisStr = show $ getAxis newMl axis  -- inefficient and dirty hack to convert Axis to String
-        isMember = Set.member newAxisStr set 
-        newSet = Set.insert newAxisStr set in
+        newAxis = getAxis newMl axis
+        isMember = Set.member newAxis set 
+        newSet = Set.insert newAxis set in
     if isMember
     then currentStep
     else moveMoons2 newMl newSet axis currentStep
 
 part2 :: [Moon] -> Int -> Int
 part2 ml axis = 
-    let set = Set.singleton (show $ getAxis ml axis) in  -- inefficient and dirty hack to convert Axis to String
+    let set = Set.singleton (getAxis ml axis) in
     moveMoons2 ml set axis 0
 
 main :: IO ()

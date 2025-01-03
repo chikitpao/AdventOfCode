@@ -4,14 +4,16 @@
 --
 -- REMARK: Uses own module IntCode
 
-import Control.Exception (assert)
 import IntCode
+    ( createProgramState2,
+      readProgram,
+      runProgramWithState,
+      MyProgramState(stateRelBase, stateOutput, stateProgram,
+                     stateNextLine) )
 import qualified Data.Map as Map
 import qualified Data.Set as Set
-import Data.Maybe (fromJust, fromMaybe, isJust, isNothing)
-import Debug.Trace
+import Data.Maybe (fromJust)
 
-debug = flip trace
 
 data Command = Reserved | North | South | West | East deriving (Enum, Eq, Show)
 data Status = Wall | Empty | O2System deriving (Enum, Eq, Show)
@@ -27,14 +29,12 @@ nextPos pos command =
         South -> (fst pos, snd pos + 1)
         West -> (fst pos - 1, snd pos)
         East -> (fst pos + 1, snd pos)
+        _ -> error "nextPos: Invalid command"
 
 nextProgramState:: Map.Map (Int, Int) MyProgramState -> (Int, Int) -> Int -> MyProgramState
 nextProgramState programStates currentPos commandId = 
     let programState = programStates Map.! currentPos in
     createProgramState2 (stateProgram programState) (stateNextLine programState) (Just [commandId]) Nothing (stateRelBase programState)
-
-isNewPos :: Maze -> (Int, Int) -> Bool
-isNewPos maze pos = Map.notMember pos (visiting maze) && Map.notMember pos (visited maze)
 
 updateMaze :: Maze -> [((Int, Int), Int)] -> [((Int, Int), Int)] -> Maze
 updateMaze maze vtingEmpty vtingWall = Maze (Map.fromList vtingEmpty) (Map.union (Map.union (visited maze) (visiting maze)) (Map.fromList vtingWall))
@@ -90,7 +90,7 @@ part2Maze programStates maze =
 fillOxygen :: [((Int, Int), Int)] -> [((Int, Int), Int)] -> [((Int, Int), Int)] -> Int -> Int
 fillOxygen vting vted notVisited steps = 
     let (posNotVisited, _ ) = unzip notVisited
-        nextStepsTemp = [nextPos f (toEnum i::Command) | (f, s) <- vting, i <- [1..4]]
+        nextStepsTemp = [nextPos f (toEnum i::Command) | (f, _) <- vting, i <- [1..4]]
         nextStepsUnique = Set.toList (Set.fromList nextStepsTemp)
         nextStepsFiltered = [ns | ns <- nextStepsUnique, ns `elem` posNotVisited]
         newVisiting = [nv | nv <- notVisited, fst nv `elem` nextStepsFiltered]

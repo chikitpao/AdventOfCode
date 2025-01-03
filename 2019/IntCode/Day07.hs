@@ -4,18 +4,10 @@
 --
 -- REMARK: Uses own module IntCode
 
-import Control.Exception (assert)
 import Data.Function (on)
 import Data.List (maximumBy, permutations)
-import Data.Maybe ( fromJust, isNothing)
+import Data.Maybe (fromJust, isNothing)
 import IntCode
-import Debug.Trace
-
--- debug = flip trace
-
-
-pairToList :: (a, a) -> [a]
-pairToList (x,y) = [x,y]
 
 
 thruster :: MyProgram -> [Int] -> Int -> Int -> Int -> ([Int], Int)
@@ -27,7 +19,6 @@ thruster program input input2 current end =
                             (input, last $ fromJust $ stateOutput endProgram)
                         else
                             thruster program input (last $ fromJust $ stateOutput endProgram) (current + 1) end
-
 
 thrusterChain :: MyProgram -> [Int] -> ([Int], Int)
 thrusterChain program input = thruster program input 0 0 5
@@ -42,7 +33,6 @@ replaceProgramState oldProgramStates current newProgramState =
         oldList = fromJust oldProgramStates
         (f, s) = splitAt current oldList
 
-
 thrusterChain2_CheckResult :: [Int] -> Maybe[MyProgramState] -> Int -> Int -> Maybe MyProgramState -> ([Int], Int)
 thrusterChain2_CheckResult input programStates current end result = 
     if isNothing result then
@@ -56,7 +46,6 @@ thrusterChain2_CheckResult input programStates current end result =
                     (input, last $ fromJust $ stateOutput endProgram)
                 else
                     let newCurrent = 0
-                        oldProgramState1 = fromJust programStates !! current
                         (h, t) = splitAt 1 $ fromJust $ stateOutput endProgram
                         newProgramStates1 = replaceProgramState programStates current (createProgramState2 program nextLine (stateInput endProgram) (Just t) (stateRelBase endProgram))
                         oldProgramState2 = fromJust programStates !! newCurrent
@@ -64,19 +53,16 @@ thrusterChain2_CheckResult input programStates current end result =
                     thrusterChain2 program input newProgramStates2 newCurrent end
         else
             let newCurrent = current + 1
-                oldProgramState1 = fromJust programStates !! current
                 (h, t) = splitAt 1 $ fromJust $ stateOutput endProgram
                 newProgramStates1 = replaceProgramState programStates current (createProgramState2 (stateProgram endProgram) (stateNextLine endProgram) (stateInput endProgram) (Just t) (stateRelBase endProgram))
                 oldProgramState2 = fromJust programStates !! newCurrent
                 newProgramStates2 = replaceProgramState newProgramStates1 newCurrent (createProgramState2 (stateProgram oldProgramState2) (stateNextLine oldProgramState2) ((++) <$> stateInput oldProgramState2 <*> Just [head h]) (stateOutput oldProgramState2) (stateRelBase oldProgramState2)) in
             thrusterChain2 (stateProgram endProgram) input newProgramStates2 newCurrent end
 
-
 getStartInput :: [Int] -> Int -> [Int]
 getStartInput input index
     | index == 0 = [head input, 0]
     | otherwise = [input !! index]
-
 
 thrusterChain2 :: MyProgram -> [Int] -> Maybe[MyProgramState] -> Int -> Int -> ([Int], Int)
 thrusterChain2 program input programStates current end = 
@@ -90,14 +76,11 @@ thrusterChain2 program input programStates current end =
             result = runProgram2 (stateProgram newProgramState) (stateNextLine newProgramState) True (stateInput newProgramState) (stateOutput newProgramState) in
             thrusterChain2_CheckResult input programStates current end result
 
-
 part1 :: MyProgram -> ([Int], Int)
 part1 program = maximumBy (compare `on` snd) [thrusterChain program p  | p <- permutations [0..4]]
 
-
 part2 :: MyProgram -> ([Int], Int)
 part2 program = maximumBy (compare `on` snd) [thrusterChain2 program p Nothing 0 5  | p <- permutations [5..9]]
-
 
 main :: IO ()
 main = do

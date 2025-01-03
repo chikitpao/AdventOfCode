@@ -4,13 +4,8 @@
 --
 -- REMARK: Uses own module IntCode
 
-import Control.Exception (assert)
-import Data.Function (on)
 import Data.Maybe (fromJust)
 import IntCode
-import Debug.Trace
-
--- debug = flip trace
 
 
 main :: IO ()

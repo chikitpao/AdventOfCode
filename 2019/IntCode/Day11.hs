@@ -8,9 +8,6 @@ import Control.Exception (assert)
 import Data.Maybe (fromJust)
 import IntCode
 import qualified Data.Map as Map
-import Debug.Trace
-
-debug = flip trace
 
 data Dir = North | East | South | West deriving (Enum)
 
@@ -52,7 +49,7 @@ doPaint panels programState step posX posY dir oldColor = assert(null (fromJust 
                                 Just panels
                             else
                                 let newPanels = Map.alter valuefunc (posX, posY) panels
-                                    (h2, t2) = splitAt 1 $ fromJust $ stateOutput newProgramState2
+                                    (h2, _) = splitAt 1 $ fromJust $ stateOutput newProgramState2
                                     (newPosX, newPosY, newDir) = turnPos posX posY dir (head h2) 
                                     newColor = Map.findWithDefault 0 (newPosX, newPosY) newPanels 
                                     programStateForIntput = createProgramState2 (stateProgram newProgramState2) (stateNextLine newProgramState2) (stateInput newProgramState2) (Just t) (stateRelBase newProgramState2) in
@@ -67,8 +64,6 @@ paintDrawing :: Map.Map (Int, Int) Int -> IO()
 paintDrawing drawing = do
     let keys = Map.keys drawing
         (xvalues, yvalues) = unzip keys
-        minX = minimum xvalues
-        maxX = maximum xvalues
         minY = minimum yvalues
         maxY = maximum yvalues
         rows = [getRowPattern drawing xvalues y | y <- [minY..maxY]]
@@ -92,3 +87,9 @@ main = do
 
 -- Answer1: 2172
 -- Answer2: JELEFGHP
+-- "               ############      ########################      ######                        ########################      ########################            ############            ######            ######      ##################                  "
+-- "                     ######      ######                        ######                        ######                        ######                        ######            ######      ######            ######      ######            ######            "
+-- "                     ######      ##################            ######                        ##################            ##################            ######                        ########################      ######            ######            "
+-- "                     ######      ######                        ######                        ######                        ######                        ######      ############      ######            ######      ##################                  "
+-- "   ######            ######      ######                        ######                        ######                        ######                        ######            ######      ######            ######      ######                              "
+-- "         ############            ########################      ########################      ########################      ######                              ##################      ######            ######      ######                              "

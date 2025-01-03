@@ -30,10 +30,6 @@ where
 
 import qualified Data.Map as Map
 import Data.Maybe ( fromJust, isNothing )
-import Control.Exception (assert)
-import Debug.Trace
-
-debug = flip trace
 
 replaceChar :: [Char] -> Char ->  [Char]
 replaceChar str ch = map (\c -> if c==ch then ' '; else c) str
@@ -92,7 +88,7 @@ getOpcodeLength 7 = 4
 getOpcodeLength 8 = 4
 getOpcodeLength 9 = 2
 getOpcodeLength 99 = 1
-getOpcodeLength _ = 10000
+getOpcodeLength _ = error "getOpcodeLength: Invalid opcode"
 
 
 checkProgramLength :: Int -> Int -> Int -> Bool
@@ -156,18 +152,21 @@ getOperandValue program opcode mode line relBase pos
                         Just(programCode program !! actualPos)
             _ -> Nothing
 
+{-
 -- debug helper function
 helper :: Int -> [Int] -> Int -> String
 helper opcode program line
     | getOpcodeLength opcode == 2 = "[" ++ show (program !! (line + 1)) ++ "]"
     | getOpcodeLength opcode == 3 = "[" ++ show (program !! (line + 1)) ++ ", " ++ show(program !! (line + 2)) ++  "]"
     | getOpcodeLength opcode == 4 = "[" ++ show (program !! (line + 1)) ++ ", " ++ show(program !! (line + 2)) ++ ", " ++ show (program !! (line + 3)) ++  "]"
+    | otherwise = error "helper: Not implemented for opcode"
 
 -- debug function
 test :: String -> Int -> Int -> Int -> MyProgram -> Int -> Int -> Maybe [Int] -> String
 test c opcode testOpcode mode program line relBase outputValue
     | opcode == 99 = show line ++ " " ++ show testOpcode ++ "[] " ++ c ++ " " ++ show outputValue ++ " " ++ show mode
     | otherwise = show line ++ " " ++ show testOpcode ++ " " ++ helper opcode (programCode program) line ++  " " ++ show outputValue ++ " " ++ show mode ++ " " ++ show relBase
+-}
 
 -- runProgram3: run program, specify haltOnOutput and relBase explicitly
 runProgram3 :: MyProgram -> Int -> Bool -> Int -> Maybe [Int] -> Maybe [Int] -> Maybe MyProgramState
@@ -186,12 +185,12 @@ runProgram3 program line haltOnOutput relBase inputValue outputValue =
             case opcode of 
                 1 -> let op1 = fromJust (getOperandValue' 1)
                          op2 = fromJust (getOperandValue' 2)
-                         sum = op1 + op2 in
-                         runProgram3 (setValue (fromJust (getOperandAddr' 3)) sum program) newLineValue haltOnOutput relBase inputValue outputValue 
+                         sum_ = op1 + op2 in
+                         runProgram3 (setValue (fromJust (getOperandAddr' 3)) sum_ program) newLineValue haltOnOutput relBase inputValue outputValue 
                 2 -> let op1 = fromJust (getOperandValue' 1)
                          op2 = fromJust (getOperandValue' 2)
-                         product = op1 * op2 in
-                         runProgram3 (setValue (fromJust (getOperandAddr' 3)) product program) newLineValue haltOnOutput relBase inputValue outputValue
+                         product_ = op1 * op2 in
+                         runProgram3 (setValue (fromJust (getOperandAddr' 3)) product_ program) newLineValue haltOnOutput relBase inputValue outputValue
                 3 -> case inputValue of
                         Nothing -> Nothing
                         Just [] -> Just (MyProgramState program line inputValue outputValue relBase True False)

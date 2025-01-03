@@ -4,16 +4,10 @@
 --
 -- REMARK: Uses own module IntCode
 
-import Control.Exception (assert)
-import Control.Monad
+import Control.Monad (unless)
 import IntCode
 import Data.Char (chr, ord)
-import Data.List (elemIndex, find)
-import Data.Maybe (fromJust, isNothing, isJust)
-import Debug.Trace
-import GHC.Exts.Heap (StgInfoTable(code))
-
-debug = flip trace
+import Data.Maybe (fromJust)
 
 -- Possible instructions are:
 -- - Movement via north, south, east, or west.

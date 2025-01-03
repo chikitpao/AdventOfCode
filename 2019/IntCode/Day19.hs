@@ -4,14 +4,8 @@
 --
 -- REMARK: Uses own module IntCode
 
-import Control.Exception (assert)
 import IntCode
-import Data.Char (chr, ord)
-import Data.List (elemIndex, find)
-import Data.Maybe (fromJust, isNothing, isJust)
-import Debug.Trace
-
-debug = flip trace
+import Data.Maybe (fromJust)
 
 e3of5 :: (MyProgram, Int, Int, Int, Int) -> Int
 e3of5 (_, _, a, _, _) = a
@@ -28,7 +22,7 @@ getBottomLeftX program dim y =
     if failed then Nothing else Just x
 
 f :: (MyProgram, Int, Int, Int, Int) -> (MyProgram, Int, Int, Int, Int)
-f (program, dim, output, x, y) = 
+f (program, dim, _, x, y) = 
     if x >= dim then
         (program, dim, 1, x + 1, y)
     else
@@ -53,7 +47,7 @@ getUpperLeft program columnCount blX y =
                                 Just (x, upperY)
 
 checkPositions :: (MyProgram, Int, Int, Int, Int) -> (MyProgram, Int, Int, Int, Int)
-checkPositions (program, dim, result, x, y) = 
+checkPositions (program, dim, _, x, y) = 
     if y >= dim then
         (program, dim, 1, 1, y + 1)
     else

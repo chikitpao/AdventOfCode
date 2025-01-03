@@ -4,15 +4,10 @@
 --
 -- REMARK: Uses own module IntCode
 
-import Control.Exception (assert)
 import IntCode
 import qualified Data.Map as Map
 import Data.Maybe (fromJust)
-import Debug.Trace
-import qualified Distribution.PackageDescription as Map
-import Graphics.Win32 (sC_RESTORE)
 
-debug = flip trace
 
 data TileId = Empty | Wall | Block | Paddle | Ball deriving (Enum, Eq, Show)
 
@@ -63,6 +58,7 @@ adjustInput ballX paddleX
     | ballX < paddleX  = -1
     | otherwise = 0
 
+{-
 debugCurrentData :: [Int] -> [Char]
 debugCurrentData currentData =
     let x = head currentData
@@ -76,6 +72,7 @@ debugCurrentData currentData =
             "Paddle: " ++ show currentData
         else
             "Others: " ++ show currentData
+-}
 
 getNewScore:: Int -> Int -> Int -> Maybe Int -> Maybe Int
 getNewScore x y value oldScore
@@ -102,8 +99,7 @@ part2 programState ballX paddleX score =
                 score
             else 
                 if stateIsHaltedForInput newProgramState then
-                    let ai = adjustInput ballX paddleX
-                        newProgramState2 = createProgramState (stateProgram newProgramState) (stateNextLine newProgramState) (Just [adjustInput ballX paddleX]) (stateOutput newProgramState) (stateRelBase newProgramState) (stateIsHaltedForInput newProgramState) (stateIsHalted newProgramState) in
+                    let newProgramState2 = createProgramState (stateProgram newProgramState) (stateNextLine newProgramState) (Just [adjustInput ballX paddleX]) (stateOutput newProgramState) (stateRelBase newProgramState) (stateIsHaltedForInput newProgramState) (stateIsHalted newProgramState) in
                     part2 newProgramState2 ballX paddleX score 
                 else
                     let newOutput = fromJust $ stateOutput newProgramState in
