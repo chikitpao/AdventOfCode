@@ -6,14 +6,14 @@ import Control.Exception (assert)
 import Data.Char (ord)
 
 fft :: [Int] -> [[Int]] -> Int -> Int -> [Int]
-fft inputListEnd pattern_ currentStep endStep = 
-    let inputListEnd' = [ abs (sum $ fmap (uncurry (*)) (zip inputListEnd (pattern_ !! i))) `mod` 10| i <- [0..(length inputListEnd - 1)]] in
-    if currentStep >= endStep then inputListEnd' else fft inputListEnd' pattern_ (currentStep + 1) endStep
+fft inputList pattern_ currentStep endStep = 
+    let inputList' = [ abs (sum $ fmap (uncurry (*)) (zip inputList (pattern_ !! i))) `mod` 10| i <- [0..(length inputList - 1)]] in
+    if currentStep >= endStep then inputList' else fft inputList' pattern_ (currentStep + 1) endStep
 
 fft2 :: [Int] -> Int -> Int -> [Int]
-fft2 inputList currentStep endStep = 
-    let inputList' = scanr1 (\x y -> (x + y) `mod` 10) inputList in
-    if currentStep >= endStep then inputList' else fft2 inputList' (currentStep + 1) endStep
+fft2 inputListEnd currentStep endStep = 
+    let inputListEnd' = scanr1 (\x y -> (x + y) `mod` 10) inputListEnd in
+    if currentStep >= endStep then inputListEnd' else fft2 inputListEnd' (currentStep + 1) endStep
 
 part2 :: [Char] -> [Int] -> Int -> [Int]
 part2 inputLine inputList endStep = 
