@@ -12,7 +12,7 @@ See Repository *AdventOfCode2024* for solutions of year 2024 (https://github.com
 Current results:
 | Year | Stars | Programming language | Start Date | Finish Date | 
 |------|------|----------------------|-----|-----|
-| \[2025\] | 7\* | PowerShell | 2025-12-02 |  |
+| \[2025\] | 8\* | PowerShell | 2025-12-02 |  |
 | \[2024\] | 50\* | Julia | 2024-12-01 | 2024-12-27 |
 | \[2023\] | 50\* | Python | 2023-12-03 | 2023-12-27 |
 | \[2022\] | 50\* | Python | 2022-12-12 | 2023-01-01 |
@@ -23,7 +23,7 @@ Current results:
 | \[2017\] | 50\* | C++ | 2023-04-16 | 2023-05-17 |
 | \[2016\] | 50\* | JavaScript | 2023-04-01 | 2023-04-15 |
 | \[2015\] | 50\* | Python | 2023-01-07 | 2023-01-14 |
-Total stars: 404\*
+Total stars: 405\*
 
 [1]: For part 2 of Day 23, I used Java to write a MPS file for input of COIN-OR Branch and Cut solver (CBC), and return values from the solution file.
 

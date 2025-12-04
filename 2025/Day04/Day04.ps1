@@ -28,6 +28,7 @@ function CheckValidPos()
     return $True
 }
 
+$Floor = '.'
 $PaperRoll = '@'
 
 function IsPaperRoll()
@@ -89,6 +90,33 @@ function Get-NeighborCount {
     return $Result
 }
 
+function RemovePaper {
+    param (
+        [Maze]$Maze
+    )
+    $Count = 0
+    $NewMaze = [Maze]::new()
+    $NewMaze.Height = $Maze.Height
+    $NewMaze.Width = $Maze.Width
+    for ($i = 0; $i -lt $ThisMaze.Height; $i++) {
+        [System.Collections.ArrayList]$CurrentRow = [System.Collections.ArrayList]::new()
+        for ($j = 0; $j -lt $ThisMaze.Width; $j++) {
+            if ($ThisMaze.Rows[$i][$j] -ne $PaperRoll) {
+                $CurrentRow.Add($Floor)
+                continue
+            }
+            if ((Get-NeighborCount -Maze $ThisMaze -Row $i -Column $j) -lt 4) {
+                $CurrentRow.Add($Floor)
+                $Count++
+            } else {
+                $CurrentRow.Add($PaperRoll)
+            }
+        }
+        $NewMaze.Rows.Add([String]::new($CurrentRow))
+    }
+    return New-Object PsObject -Property @{removed=$Count; maze=$NewMaze}
+}
+
 function Main {
     $ThisMaze = [Maze]::new()
     foreach ($line in Get-Content "input.txt") {
@@ -100,23 +128,27 @@ function Main {
     }
 
     # Part 1
-    $Answer1 = 0
-    for ($i = 0; $i -lt $ThisMaze.Height; $i++) {
-        for ($j = 0; $j -lt $ThisMaze.Width; $j++) {
-            if ($ThisMaze.Rows[$i][$j] -ne $PaperRoll) {
-                continue;
-            }
-            if ((Get-NeighborCount -Maze $ThisMaze -Row $i -Column $j) -lt 4) {
-                $Answer1++
-            }
-        }
-    }
-
+    $Answer1 = (RemovePaper -Maze $ThisMaze).removed
     Write-Host "Question 1: How many rolls of paper can be accessed by a forklift?"
     Write-Host "Answer:", $Answer1
+
+    # Part 2
+    $Answer2 = 0
+    do {
+        $Object = RemovePaper -Maze $ThisMaze
+        $NewRemoved = $Object.removed
+        $Answer2 += $NewRemoved
+        Write-Host "Removed: $NewRemoved"
+        $ThisMaze = $Object.maze
+    } while ($NewRemoved -gt 0)
+
+    Write-Host "Question 2: How many rolls of paper in total can be removed by the Elves and their forklifts?"
+    Write-Host "Answer:", $Answer2
 }
 
 Main
 
 # Question 1: How many rolls of paper can be accessed by a forklift?
 # Answer: 1320
+# Question 2: How many rolls of paper in total can be removed by the Elves and their forklifts?
+# Answer: 8354
