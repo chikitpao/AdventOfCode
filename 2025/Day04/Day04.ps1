@@ -119,4 +119,4 @@ function Main {
 Main
 
 # Question 1: How many rolls of paper can be accessed by a forklift?
-# Answer: 2006 (too high)
+# Answer: 1320
