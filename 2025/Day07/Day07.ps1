@@ -45,19 +45,19 @@ function InitQuiz($Lines){
     return $Quiz
 }
 
-function Get-EmptyBeamList($ColumnCount)
+function Get-EmptyBeamList($ColumnCount, $Value)
 {
     $Result = [System.Collections.ArrayList]::new()
     for($Column = 0; $Column -lt $ColumnCount; $Column++) {
-        $Result.Add($False) | Out-Null
+        $Result.Add($Value) | Out-Null
     }
     return $Result
 }
 
 function Part1($Quiz) {
     $Splits = 0
-    $OldBeams = Get-EmptyBeamList($Quiz.ColumnCount)
-    $NewBeams = Get-EmptyBeamList($Quiz.ColumnCount)
+    $OldBeams = Get-EmptyBeamList -ColumnCount $Quiz.ColumnCount -Value $False
+    $NewBeams = Get-EmptyBeamList -ColumnCount $Quiz.ColumnCount -Value $False
 
     $OldBeams[$Quiz.Start.Column] = $True
     for ($Row = 2; $Row -lt $Quiz.RowCount; $Row+=2) {
@@ -75,9 +75,33 @@ function Part1($Quiz) {
             }
         }
         $OldBeams = $NewBeams
-        $NewBeams = Get-EmptyBeamList($Quiz.ColumnCount)
+        $NewBeams = Get-EmptyBeamList -ColumnCount $Quiz.ColumnCount -Value $False
     }
     return $Splits
+}
+
+function Part2($Quiz) {
+    $OldBeams = Get-EmptyBeamList -ColumnCount $Quiz.ColumnCount -Value ([long]0)
+    $NewBeams = Get-EmptyBeamList -ColumnCount $Quiz.ColumnCount -Value ([long]0)
+
+    $OldBeams[$Quiz.Start.Column] = [long]1
+    for ($Row = 2; $Row -lt $Quiz.RowCount; $Row+=2) {
+        for ($Column = 0; $Column -lt $Quiz.ColumnCount; $Column++) {
+            if ($Quiz.Lines[$Row][$Column] -eq $Splitter) {
+                if($OldBeams[$Column] -gt 0) {
+                    $NewBeams[$Column - 1] += $OldBeams[$Column]
+                    $NewBeams[$Column + 1] += $OldBeams[$Column]
+                }
+            } else {
+                if($OldBeams[$Column] -gt 0) {
+                    $NewBeams[$Column] += $OldBeams[$Column]
+                }
+            }
+        }
+        $OldBeams = $NewBeams
+        $NewBeams = Get-EmptyBeamList -ColumnCount $Quiz.ColumnCount -Value ([long]0)
+    }
+    return ($OldBeams | Measure-Object -Sum).Sum
 }
 
 function Main {
@@ -87,9 +111,13 @@ function Main {
 
     Write-Host "Question 1: How many times will the beam be split?"
     Write-Host "Answer:", (Part1 $Quiz)
+    Write-Host "Question 2: In total, how many different timelines would a single tachyon particle end up on?"
+    Write-Host "Answer:", (Part2 $Quiz)
 }
 
 Main
 
 # Question 1: How many times will the beam be split?
 # Answer: 1570
+# Question 2: In total, how many different timelines would a single tachyon particle end up on?
+# Answer: 15118009521693
