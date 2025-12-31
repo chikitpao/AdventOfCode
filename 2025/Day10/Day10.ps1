@@ -3,6 +3,11 @@
     Day 10: Factory
     Author: Chi-Kit Pao
     pwsh -ExecutionPolicy ByPass -File "Day10.ps1"
+
+    REMARKS: 
+    - Uses LpSolve (https://sourceforge.net/projects/lpsolve/) to solve part 2.
+      (Installed on my windows machine under "C:\Program Files (x86)\lp_solve_5.5.2.11_exe_win64\lp_solve.exe")
+    - Creates temporary file "equation.lp" in the current directory of script.
 #>
 
 class TestState{
@@ -11,6 +16,7 @@ class TestState{
 }
 
 class Machine{
+    $Id = -1
     $LightCount = 0
     $DesiredState = 0
     $Buttons = [System.Collections.ArrayList]::new()
@@ -61,6 +67,56 @@ class Machine{
         }
         return -1
     }
+    [int] Part2() {
+        $LpObjective = "min: "
+        $LpConstraints = ""
+        $LpVars = ""  # For integer variable definitions
+        
+        for ($j = 0; $j -lt $this.Buttons.Count; $j++) {
+            $LpVar = "x" + $j
+            if($j -eq 0) {
+                $LpObjective += $LpVar
+            } else {
+                $LpObjective += " + " + $LpVar
+            }
+            $LpConstraints += $LpVar + ">= 0;`n"
+            $LpVars += "int " + $LpVar + ";`n"
+        }
+        
+        for($i = 0; $i -lt $this.LightCount; $i++) {
+            $LightConstraint = ""
+            for ($j = 0; $j -lt $this.Buttons.Count; $j++) {
+                $Button = $this.Buttons[$j]
+                if (($Button -band (1 -shl $i)) -ne 0) {
+                    $LpVar = "x" + $j
+                    if($LightConstraint.Length -eq 0) {
+                        $LightConstraint += $LpVar
+                    } else {
+                        $LightConstraint += " + " + $LpVar
+                    }
+                }
+            }
+            $LightConstraint += " = $($this.JoltageRequirements[$i]);`n"
+            $LpConstraints += $LightConstraint
+        }
+        $LpObjective += ";`n"
+        $LpModel = $LpObjective + $LpConstraints + $LpVars
+        # Write-Host "Machine $($this.Id)"
+        # Write-Host $LpModel
+        $LpPath = "equation.lp"
+        $LpModel | Set-Content $LpPath
+        # REMARK: Retrieving value from "$Matches" somehow didn't work when I stored the output of LpSolve to a 
+        # variable.
+        foreach ($Line in (& "C:\Program Files (x86)\lp_solve_5.5.2.11_exe_win64\lp_solve.exe" $lpPath)) {
+             if($Line -match "Value of objective function: (?<value>(\d*\.)?\d+)") {
+                # Write-Host "Matches.Count", $Matches.Count
+                # Write-Host "Matches:", $Matches["value"]
+                return [Math]::Round([double]$Matches["value"])
+             }
+        }
+        throw "Failed to retrieve value in part 2!"
+        return -1
+    }
 }
 
 function ParseInput($Line) {
@@ -100,8 +156,10 @@ function ParseInput($Line) {
 
 function Main {
     $Machines = [System.Collections.ArrayList]::new()
+
     foreach ($Line in Get-Content "input.txt") {
         $Machine = ParseInput($Line)
+        $Machine.Id = $Machines.Count
         $Null = $Machines.Add($Machine)
     }
 
@@ -111,9 +169,18 @@ function Main {
     }
     Write-Host "Question 1: What is the fewest button presses required to correctly configure the indicator lights on all of the machines?"
     Write-Host "Answer:", $Answer1
+
+    $Answer2 = 0
+    foreach($Machine in $Machines) {
+        $Answer2 += $Machine.Part2()
+    }
+    Write-Host "Question 2: What is the fewest button presses required to correctly configure the joltage level counters on all of the machines?"
+    Write-Host "Answer:", $Answer2
 }
 
 Main
 
 # Question 1:  What is the fewest button presses required to correctly configure the indicator lights on all of the machines?
 # Answer: 538
+# Question 2: What is the fewest button presses required to correctly configure the joltage level counters on all of the machines?
+# Answer: 20298
