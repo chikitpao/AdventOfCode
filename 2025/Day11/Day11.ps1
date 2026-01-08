@@ -113,7 +113,7 @@ function Part1($Devices, $From, $To) {
 # Hashtable for Memoization
 [hashtable] $CachedResults = @{}
 
-function Part2Helper($Devices, $To, $CurrentPath, $CurrentPathKey, $ExclusionList) {
+function Part2Helper($Devices, $To, $CurrentPath, $ExclusionList) {
     $CurrentId = $CurrentPath[-1]
     if ($global:CachedResults.Contains($CurrentId)) {
         return $global:CachedResults[$CurrentId]
@@ -133,8 +133,7 @@ function Part2Helper($Devices, $To, $CurrentPath, $CurrentPathKey, $ExclusionLis
                  continue
             }
             $Null = $CurrentPath.Add($OutId)
-            $NewPathKey = $CurrentPathKey + "&" + ([String]$OutId)
-            $Result += (Part2Helper -Devices $Devices -To $To -CurrentPath $CurrentPath -CurrentPathKey $NewPathKey -ExclusionList $ExclusionList)
+            $Result += (Part2Helper -Devices $Devices -To $To -CurrentPath $CurrentPath -ExclusionList $ExclusionList)
             $CurrentPath.RemoveAt($CurrentPath.Count - 1) | Out-Null
         }
     }
@@ -151,7 +150,7 @@ function Part2($Devices, $From, $To) {
     $Null = $ExclusionList.Add($DeviceDac.Id)
     $Null = $ExclusionList.Add($DeviceFft.Id)
     $ExclusionList.Remove($To.Id)
-    return Part2Helper -Devices $Devices -To $To -CurrentPath $CurrentPath -CurrentPathKey ([String]$From.Id) -ExclusionList $ExclusionList
+    return Part2Helper -Devices $Devices -To $To -CurrentPath $CurrentPath -ExclusionList $ExclusionList
 }
 
 function Main {
