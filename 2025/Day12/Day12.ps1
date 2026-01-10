@@ -54,6 +54,9 @@ function ParseInput($Lines) {
         $Present.Lines = $Lines[($EmptyLineIndices[$i] + 2)..($EmptyLineIndices[$i+1] - 1)]
         $Present.TilesCount = ([regex]::Matches($Present.Lines, "#")).Count
         $Null = $Presents.Add($Present)
+        if (($Present.Lines.Count -gt 3) -or ($Present.Lines[0].Length -gt 3)) {
+            throw "Dimension of presents exceeds 3!"
+        }
     }
 }
 
@@ -64,15 +67,20 @@ function Main {
     $Answer1 = 0
     Write-Host "Question 1: How many of the regions can fit all of the presents listed?"
     foreach ($Region in $Regions) {
-        # Actually it's just by accident that the answer is correct since I'm not really
-        # packing the presents, but just comparing region size with the total size of all presents.
+        # REMARK: The regions in the input file don't require actual packing since they have one of the following properties:
+        # a) Region size is smaller than the total size of all presents => Impossible to pack.
+        # b) Region is big enough for 3x3 clusters of every single present => Possible to pack.
         $RegionSize = $Region.ColumnCount * $Region.RowCount
         $TotalPresentSize = 0
         for ($i = 0; $i -lt $Region.PresentCounts.Count; $i++ ) {
             $TotalPresentSize += $Region.PresentCounts[$i] * $Presents[$i].TilesCount
         }
-        # Write-Host $RegionSize, $TotalPresentSize
         if ($RegionSize -ge $TotalPresentSize) {
+            $ClusterCount = ([int] [Math]::Truncate($Region.ColumnCount / 3)) * ([int] [Math]::Truncate($Region.RowCount / 3))
+            $PresentCount = ($Region.PresentCounts | Measure-Object -Sum).Sum
+            if ($ClusterCount -lt $PresentCount) {
+                throw "Cluster count is less than present count!"
+            }
             $Answer1 += 1
         }
     }
