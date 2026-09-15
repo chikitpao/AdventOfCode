@@ -7,6 +7,7 @@ Advent Of Code 2020
 |-----|----------------------|
 | 1 | Assembly (nasm, under Linux) |
 | 2 | Bash (under Linux) |
+| 3 | Pascal (Free Pascal Compiler, under Linux) |
 
 License & Copyright
 -------------------

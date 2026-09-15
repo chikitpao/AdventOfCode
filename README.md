@@ -17,13 +17,13 @@ Current results:
 | \[2023\] | 50\* / 50\* | Python | 2023-12-03 | 2023-12-27 |
 | \[2022\] | 50\* / 50\* | Python | 2022-12-12 | 2023-01-01 |
 | \[2021\] | - / 50\* |  | | |
-| \[2020\] | 4\* / 50\* | 25 different languages | 2026-09-13 | |
+| \[2020\] | 6\* / 50\* | 25 different languages | 2026-09-13 | |
 | \[2019\] | 47\* / 50\* | Haskell | 2023-07-03 | |
 | \[2018\] | 50\* / 50\* | Java [1] | 2023-05-17| 2023-06-11 |
 | \[2017\] | 50\* / 50\* | C++ | 2023-04-16 | 2023-05-17 |
 | \[2016\] | 50\* / 50\* | JavaScript | 2023-04-01 | 2023-04-15 |
 | \[2015\] | 50\* / 50\* | Python | 2023-01-07 | 2023-01-14 |
-Total stars: 425\*
+Total stars: 427\*
 
 [1]: For part 2 of Day 23, I used Java to write a MPS file for input of COIN-OR Branch and Cut solver (CBC), and return values from the solution file.
 
