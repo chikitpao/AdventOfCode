@@ -1,0 +1,25 @@
+Manual Solution of AoC 2020, Day 5 (Binary Boarding)
+
+Author: Chi-Kit Pao
+
+This text describes how I solved the puzzle from 2020, Day 5 (Binary Boarding), only using text editor Notepad++.
+
+The input file contains lines, and which line consists of 6 letters from conbinations of 'F's (front) and 'B's (back), then 3 letters from conbinations of 'L's (left) and 'R's (right). In the way how the seat IDs are constructed, we can also get the seat ID (in binary representation) by replacing 'F's and 'L's with 0; also replacing 'B's and 'R's with 1.
+
+Since letter 'R' has a higher lexicographical order than 'L', but 'B' has a lower lexicographical order than 'F', we need to replace 'B' with a letter of higher lexicographical order (e. g. 'b' in small letter) before we can sort the modified input file lexicographically.
+
+Now we can sort the lines in ascending order (actually let Notepad++ sort it). An empty line shows up after sorting, which still needs to be removed.
+
+In the last line of the file, there will bei the seat with the highest ID. For my input, it's 938 (Answer 1).
+
+My modified input file has 868 lines, with the first seat ID being 70 and the last seat ID being 938. The range between 70 und 938 contains 869 numbers, which means there is really only one ID missing.
+
+Now we can use Notepad++ again to search the lines for the same end pattern (e. g. "RRR"). The line numbers of the matches can show one of the following three patterns:
+
+1. All line numbers of lines containing the search pattern are of the same parity (either all even or all odd). This means that the missing seat is either at the beginning before the first match or at the end after the last match.
+
+2. There is one parity change in the line numbers (even to odd or odd to even) and the both lines numbers differ by 7. This means the missing seat is between these two seats.
+
+3. There is one parity change in the line numbers (even to odd or odd to even) and the both lines numbers differ by 15. This means the missing seat is exactly in the middle of these two seats, and has the end pattern of your search term.
+
+In my modified input file, the parity change happens between lines 626 and 633 (even to odd), and the missing seat number is 696 (Answer 2).
