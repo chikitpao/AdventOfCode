@@ -10,7 +10,7 @@ Advent Of Code 2020
 | 3 | Pascal (Free Pascal Compiler, under Linux) |
 | 4 | Fortran (GNU Fortran Compiler, under Linux) |
 | 5 | Solved by hand using Notepad++ (under Windows) |
-| 5 | FreeBASIC (under Windows) |
+| 6 | FreeBASIC (under Windows) |
 
 License & Copyright
 -------------------
