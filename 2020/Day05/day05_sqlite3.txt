@@ -1,0 +1,48 @@
+##### AoC 2020, Day 5 (Binary Boarding)
+##### Author: Chi-Kit Pao
+##### Solution using Linux shell and SQLite CLI.
+
+##### In Linux shell:
+# Add column "SEAT" in front of input file and save the result to input2.txt.
+echo "SEAT" | cat - input.txt > input2.txt
+# Open sqlite3.
+sqlite3
+
+##### In SQLite CLI:
+# Import file content from input2.txt into table INPUTS.
+.import input2.txt INPUTS
+# Create new table INPUTS2 and set the values.
+create table INPUTS2(
+   seat VARCHAR(10),
+   id INT,
+   rowid INT,
+   columnid INT
+   );
+insert into INPUTS2(seat, id, rowid, columnid)
+   select seat, 0, 0, 0 from INPUTS;
+update INPUTS2 set columnid = (substring(seat, 10, 1) = "R") + (substring(seat, 9, 1) = "R") * 2 + (substring(seat, 8, 1) = "R") * 4;
+update INPUTS2 set rowid = (substring(seat, 7, 1) = "B") + (substring(seat, 6, 1) = "B") * 2 + (substring(seat, 5, 1) = "B") * 4 +
+    (substring(seat, 4, 1) = "B") * 8 + (substring(seat, 3, 1) = "B") * 16 + (substring(seat, 2, 1) = "B") * 32 +
+    (substring(seat, 1, 1) = "B") * 64;
+update INPUTS2 set id = rowid * 8 + columnid;
+
+## Answer 1: (938 for my input)
+select max(id) from INPUTS2;
+# Show count, min, and max. Check count = max - min (i.e. exactly 1 ID missing).
+select count(*), min(id), max(id) from INPUTS2;
+## Answer 2: (696 for my input)
+select t12.guessid from
+(select t1.n, (t2.rowid * 8 + t1.n) as guessid from
+(with recursive numbers(n) as (
+    select 0
+    union all
+    select n + 1
+    from numbers
+    where n < 7
+) select n from numbers) as t1
+cross join
+(select rowid, columnid from INPUTS2 group by rowid having count(*) = 7) as t2) as t12
+left join
+(select id, rowid, columnid from INPUTS2 where rowid = (select rowid from INPUTS2 group by rowid having count(*) = 7)) as t3
+on t12.guessid = t3.id
+where t3.id is null and t12.guessid > (select min(id) from INPUTS2) and t12.guessid < (select max(id) from INPUTS2);

@@ -16,7 +16,7 @@ My modified input file has 868 lines, with the first seat ID being 70 and the la
 
 Now we can use Notepad++ again to search the lines for the same end pattern (e. g. "RRR"). The line numbers of the matches can show one of the following three patterns:
 
-1. All line numbers of lines containing the search pattern are of the same parity (either all even or all odd). This means that the missing seat is either at the beginning before the first match or at the end after the last match.
+1. All line numbers of lines containing the search pattern are of the same parity (either all even or all odd). This means that the missing seat is either at the beginning before the first match or at the end after the last match. In hindsight, this case isn't possible because the puzzle states that the missing seat is neither at the very front nor at the very back.
 
 2. There is one parity change in the line numbers (even to odd or odd to even) and the both lines numbers differ by 7. This means the missing seat is between these two seats.
 
