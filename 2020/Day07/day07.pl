@@ -2,7 +2,6 @@
 %  Author: Chi-Kit Pao
 %
 %  Commands (used SWI Prolog):
-%  python3 translate_input.py > day07.pl
 %  swipl day07.pl
 %
 %  Outputs:
