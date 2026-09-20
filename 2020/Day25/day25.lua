@@ -1,6 +1,6 @@
 --[[
 
-    AoC2020, Day 25: Combo Breaker ---
+    AoC2020, Day 25: Combo Breaker
     Author: Chi-Kit Pao
 
     Commands:
