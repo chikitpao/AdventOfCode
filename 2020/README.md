@@ -12,7 +12,8 @@ Advent Of Code 2020
 | 5 | First solution for both parts: Solved by hand using Notepad++ (under Windows).<br> Second solution for both parts: Solved using Linux shell and SQLite CLI. |
 | 6 | FreeBASIC (under Windows) |
 | 7 | SWI Prolog (under Linux) |
-| 8 | Rust (under Linux) |
+| 8 | Rust |
+| 9 | Racket |
 | ... |  |
 | 25 | Lua (under Linux) |
 

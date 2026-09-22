@@ -5,7 +5,7 @@
 //  Question 1: Immediately before any instruction is executed a second time, what value is in the accumulator?
 //  Answer: 2034
 //  Question 2: What is the value of the accumulator after the program terminates?
-//  Answer: 672 (too low)
+//  Answer: 672
 //
 //  Time usage shown via command "time".
 //  real	0m0,048s
