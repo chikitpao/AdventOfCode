@@ -14,6 +14,7 @@ Advent Of Code 2020
 | 7 | SWI Prolog (under Linux) |
 | 8 | Rust |
 | 9 | Racket |
+| 10 | Haskell |
 | ... |  |
 | 25 | Lua (under Linux) |
 
