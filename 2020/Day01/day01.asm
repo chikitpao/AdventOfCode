@@ -13,7 +13,7 @@
 ; Question 2: What is the product of the three entries that sum to 2020?
 ; Answer: 281473080
 ;
-; Time usage shown via command "time".
+; Time usage shown via command "time":
 ; real	0m0,001s
 ; user	0m0,001s
 ; sys	0m0,000s

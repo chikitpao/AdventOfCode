@@ -13,7 +13,7 @@
 # Question 2: How many passwords are valid according to the new interpretation of the policies?
 # Answer: 482
 #
-# Time usage shown via command "time".
+# Time usage shown via command "time":
 # real	0m3,791s
 # user	0m2,986s
 # sys	0m1,521s

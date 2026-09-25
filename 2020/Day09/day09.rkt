@@ -13,7 +13,7 @@
   Question 2: What is the encryption weakness in your XMAS-encrypted list of numbers?
   Answer: 2186361
 
-  Time usage shown via command "time".
+  Time usage shown via command "time":
   real	0m1,288s
   user	0m1,235s
   sys	0m0,053s

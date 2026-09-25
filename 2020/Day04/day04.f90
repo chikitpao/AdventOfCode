@@ -11,7 +11,7 @@
 !   Question 2: In your batch file, how many passports are valid?
 !   Answer:          147
 !
-!   Time usage shown via command "time".
+!   Time usage shown via command "time":
 !   real	0m0,007s
 !   user	0m0,009s
 !   sys	0m0,001s

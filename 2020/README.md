@@ -16,6 +16,8 @@ Advent Of Code 2020
 | 9 | Racket |
 | 10 | Haskell |
 | ... |  |
+| 12 | Tcl |
+| ... |  |
 | 25 | Lua (under Linux) |
 
 License & Copyright

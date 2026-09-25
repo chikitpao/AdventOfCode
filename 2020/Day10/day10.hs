@@ -7,7 +7,7 @@
     Question 1: What is the number of 1-jolt differences multiplied by the number of 3-jolt differences?
     Answer: 1914
     Question 2: What is the total number of distinct ways you can arrange the adapters to connect the charging outlet to your device?
-    Answer 2: 9256148959232
+    Answer: 9256148959232
 -}
 
 import Data.List
@@ -44,4 +44,4 @@ main = do
     putStrLn "Question 1: What is the number of 1-jolt differences multiplied by the number of 3-jolt differences?"
     putStrLn $ "Answer: " ++ show (answer1 numbers)
     putStrLn "Question 2: What is the total number of distinct ways you can arrange the adapters to connect the charging outlet to your device?"
-    putStrLn $ "Answer 2: " ++ show (answer2 numbers)
+    putStrLn $ "Answer: " ++ show (answer2 numbers)

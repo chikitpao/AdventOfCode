@@ -7,7 +7,7 @@
 //  Question 2: What is the value of the accumulator after the program terminates?
 //  Answer: 672
 //
-//  Time usage shown via command "time".
+//  Time usage shown via command "time":
 //  real	0m0,048s
 //  user	0m0,037s
 //  sys	0m0,012s

@@ -10,7 +10,7 @@
     Question: What encryption key is the handshake trying to establish?
     Answer: 3803729
 
-    Time usage shown via command "time".
+    Time usage shown via command "time":
     real	0m0,973s
     user	0m0,975s
     sys	0m0,001s
