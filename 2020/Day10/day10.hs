@@ -2,12 +2,17 @@
     Day10.hs
     AoC 2020 Day 10: Adapter Array
     Author: Chi-Kit Pao
-    
+
     Output:
     Question 1: What is the number of 1-jolt differences multiplied by the number of 3-jolt differences?
     Answer: 1914
     Question 2: What is the total number of distinct ways you can arrange the adapters to connect the charging outlet to your device?
     Answer: 9256148959232
+
+    Time usage shown via command "time":
+    real	0m0,005s
+    user	0m0,005s
+    sys	0m0,000s
 -}
 
 import Data.List
@@ -25,7 +30,7 @@ answer1 numbers = joltlist 1 * (joltlist 3 + 1)
 -- Construct answer 2 backwards
 f :: Set.Set Int -> Int -> [Int] -> Int
 f set current lst
-    | current == 0 = sum_ 
+    | current == 0 = sum_
     | Set.member current set = f set (current - 1) (sum_ : init_)
     | otherwise =  f set (current - 1) (0 : init_)
     where init_ = init lst
@@ -33,7 +38,7 @@ f set current lst
 
 answer2 :: [Int] -> Int
 answer2 numbers = f s m [1, 0, 0, 1]
-    where 
+    where
         m = maximum numbers
         s = Set.fromList numbers
 

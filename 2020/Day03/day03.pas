@@ -11,6 +11,11 @@
     Answer: 216
     Question 2: What do you get if you multiply together the number of trees encountered on each of the listed slopes?
     Answer: 6708199680
+
+    Time usage shown via command "time":
+    real	0m0,007s
+    user	0m0,001s
+    sys	0m0,006s
 }
 
 

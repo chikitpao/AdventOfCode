@@ -15,7 +15,7 @@ Advent Of Code 2020
 | 8 | Rust |
 | 9 | Racket |
 | 10 | Haskell |
-| ... |  |
+| 11 | Perl 5 |
 | 12 | Tcl |
 | ... |  |
 | 25 | Lua (under Linux) |

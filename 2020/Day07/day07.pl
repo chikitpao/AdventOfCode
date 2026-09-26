@@ -2,7 +2,8 @@
 %  Author: Chi-Kit Pao
 %
 %  Commands (used SWI Prolog):
-%  swipl day07.pl
+%  swipl day07.pl, or
+%  swipl -t halt day07.pl (no interactive mode)
 %
 %  Outputs:
 %  Question 1: How many bag colors can eventually contain at least one shiny gold bag?
@@ -10,6 +11,13 @@
 %  Question 2: How many individual bags are required inside your single shiny gold bag?
 %  Answer: 6683
 %
+
+%
+%  Time usage shown via command "time":
+%  real	0m0,076s
+%  user	0m0,073s
+%  sys	0m0,004s
+
 
 :- use_module(library(readutil)).
 
