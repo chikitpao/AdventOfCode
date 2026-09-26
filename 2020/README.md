@@ -17,6 +17,7 @@ Advent Of Code 2020
 | 10 | Haskell |
 | 11 | Perl 5 |
 | 12 | Tcl |
+| 13 | PHP and SageMath |
 | ... |  |
 | 25 | Lua (under Linux) |
 
