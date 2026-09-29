@@ -19,6 +19,7 @@ Advent Of Code 2020
 | 12 | Tcl |
 | 13 | PHP |
 | 14 | Ruby |
+| 15 | Go |
 | ... |  |
 | 25 | Lua (under Linux) |
 
