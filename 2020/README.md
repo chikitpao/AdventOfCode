@@ -23,6 +23,7 @@ Advent Of Code 2020
 | 16 | PowerShell |
 | 17 | C# |
 | 18 | Groovy |
+| 19 | Kotlin |
 | ... |  |
 | 25 | Lua (under Linux) |
 
