@@ -24,6 +24,7 @@ Advent Of Code 2020
 | 17 | C# |
 | 18 | Groovy |
 | 19 | Kotlin |
+| 20 | Java (Part 1 only) |
 | ... |  |
 | 25 | Lua (under Linux) |
 
