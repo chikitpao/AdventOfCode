@@ -26,6 +26,8 @@ Advent Of Code 2020
 | 19 | Kotlin |
 | 20 | Java |
 | ... |  |
+| 22 | C++ |
+| ... |  |
 | 25 | Lua (under Linux) |
 
 License & Copyright
