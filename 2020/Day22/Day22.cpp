@@ -7,7 +7,7 @@
 // Answer: 34127
 // Question 2: What is the winning player's score?
 // Answer : 32054
-// Duration: 15.173 s
+// Duration: 2.945 s
 
 #include <algorithm>
 #include <cassert>
@@ -17,6 +17,7 @@
 #include <iostream>
 #include <set>
 #include <sstream>
+#include <vector>
 
 using steady_clock = std::chrono::steady_clock;
 static double ToSecond(steady_clock::time_point begin, steady_clock::time_point end)
@@ -77,7 +78,18 @@ static int GetScore(const std::deque<int>& cards)
 		score += i * cards[cards.size() - i];
 	}
 	return score;
-};
+}
+
+static int GetScore(const std::vector<int>& cards)
+{
+	int score = 0;
+	// Top card at the end of vector.
+	for (int i = 0; i < cards.size(); ++i)
+	{
+		score += (i + 1) * cards[i];
+	}
+	return score;
+}
 
 static int Part1(std::deque<int> cards1, std::deque<int> cards2)
 {
@@ -111,10 +123,17 @@ class Game
 {
 public:
 	typedef std::deque<int>::const_iterator cdequeit;
-	Game(cdequeit begin1, cdequeit end1, cdequeit begin2, cdequeit end2, bool needScore)
+	Game(std::deque<int> cards1, std::deque<int> cards2, bool needScore)
 	{
-		std::copy(begin1, end1, std::back_inserter(m_cards1));
-		std::copy(begin2, end2, std::back_inserter(m_cards2));
+		std::copy(cards1.crbegin(), cards1.crend(), std::back_inserter(m_cards1));
+		std::copy(cards2.crbegin(), cards2.crend(), std::back_inserter(m_cards2));
+		m_needScore = needScore;
+	}
+	typedef std::vector<int>::const_iterator cvectorit;
+	Game(cvectorit begin1, cvectorit end1, cvectorit begin2, cvectorit end2, bool needScore)
+	{
+		m_cards1.assign(begin1, end1);
+		m_cards2.assign(begin2, end2);
 		m_needScore = needScore;
 	}
 	int Play()
@@ -132,22 +151,23 @@ public:
 			m_history.emplace(situation);
 			
 			// Draw cards
-			int card1 = m_cards1.front();
-			m_cards1.pop_front();
-			int card2 = m_cards2.front();
-			m_cards2.pop_front();
+			int card1 = m_cards1.back();
+			m_cards1.pop_back();
+			int card2 = m_cards2.back();
+			m_cards2.pop_back();
 			if (m_cards1.size() >= card1 && m_cards2.size() >= card2)
 			{
 				// Play a new game of Recursive Combat
-				if (Game(m_cards1.begin(), m_cards1.begin() + card1, m_cards2.begin(), m_cards2.begin() + card2, false).Play() > 0)
+				if (Game(m_cards1.end() - card1, m_cards1.end(), m_cards2.end() - card2, m_cards2.end(), false).Play() > 0)
 				{
-					m_cards1.push_back(card1);
-					m_cards1.push_back(card2);
+					m_cards1.insert(m_cards1.begin(), { card2, card1 });
+					//m_cards1.insert(m_cards1.begin(), card2);
+					
 				}
 				else
 				{
-					m_cards2.push_back(card2);
-					m_cards2.push_back(card1);
+					m_cards2.insert(m_cards2.begin(), { card1, card2 });
+					//m_cards2.insert(m_cards2.begin(), card1);
 				}
 			}
 			else
@@ -157,13 +177,13 @@ public:
 					throw std::runtime_error("No rule is defined on draw! Exit program!");
 				if (card1 > card2)
 				{
-					m_cards1.push_back(card1);
-					m_cards1.push_back(card2);
+					m_cards1.insert(m_cards1.begin(), { card2, card1 });
+					//m_cards1.insert(m_cards1.begin(), card2);
 				}
 				else
 				{
-					m_cards2.push_back(card2);
-					m_cards2.push_back(card1);
+					m_cards2.insert(m_cards2.begin(), { card1, card2 });
+					//m_cards2.insert(m_cards2.begin(), card1);
 				}
 			}
 		}
@@ -173,26 +193,35 @@ public:
 		else
 			return m_needScore ? -GetScore(m_cards2) : -1;
 	}
-	static std::string GetSituationString(const std::deque<int>& cards1, const std::deque<int>& cards2)
+	static std::string GetSituationString(const std::vector<int>& cards1, const std::vector<int>& cards2)
 	{
-		std::stringstream sstream;
+		// The previous implementation using "std::stringstream" was the biggest
+		// performance bottleneck. Now use "std::string" instead.
+		std::string result;
+
+		// It doens't matter when the cards are stored backwards. :-)
 		for (auto i : cards1)
-			sstream << i << ",";
-		sstream << ";";
+			result += std::to_string(i) + ",";
+		
+		result += ";";
+		
 		for (auto i : cards2)
-			sstream << i << ",";
-		return sstream.str();
+			result += std::to_string(i) + ",";
+		
+		return result;
 	}
 private:
-	std::deque<int> m_cards1;
-	std::deque<int> m_cards2;
+	// Cards are stored in reverse order for performance. Top card is at the 
+	// end of the vector.
+	std::vector<int> m_cards1;
+	std::vector<int> m_cards2;
 	std::set<std::string> m_history;
 	bool m_needScore;
 };
 
-static int Part2(const std::deque<int>& cards1, std::deque<int>& cards2)
+static int Part2(const std::deque<int>& cards1, const std::deque<int>& cards2)
 {;
-	auto game = Game(cards1.begin(), cards1.end(), cards2.begin(), cards2.end(), true);
+	auto game = Game(cards1, cards2, true);
 	return std::abs(game.Play());
 }
 
