@@ -6,12 +6,12 @@ Advent Of Code 2020
 | Day | Programming language |
 |-----|----------------------|
 | 1 | Assembly (nasm, under Linux) |
-| 2 | Bash (under Linux) |
-| 3 | Pascal (Free Pascal Compiler, under Linux) |
-| 4 | Fortran (GNU Fortran Compiler, under Linux) |
+| 2 | Bash |
+| 3 | Pascal (Free Pascal Compiler) |
+| 4 | Fortran (GNU Fortran Compiler) |
 | 5 | First solution for both parts: Solved by hand using Notepad++ (under Windows).<br> Second solution for both parts: Solved using Linux shell and SQLite CLI. |
-| 6 | FreeBASIC (under Windows) |
-| 7 | SWI Prolog (under Linux) |
+| 6 | FreeBASIC |
+| 7 | SWI Prolog |
 | 8 | Rust |
 | 9 | Racket |
 | 10 | Haskell |
@@ -29,7 +29,7 @@ Advent Of Code 2020
 | 22 | C++ |
 | 23 | Julia |
 | 24 | Python |
-| 25 | Lua (under Linux) |
+| 25 | Lua  |
 
 License & Copyright
 -------------------
