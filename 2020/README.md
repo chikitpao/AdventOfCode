@@ -27,7 +27,7 @@ Advent Of Code 2020
 | 20 | Java |
 | 21 | JavaScript |
 | 22 | C++ |
-| 23 | Julia (Part 1 only) |
+| 23 | Julia |
 | ... |  |
 | 25 | Lua (under Linux) |
 

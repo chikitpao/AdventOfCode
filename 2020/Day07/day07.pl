@@ -52,8 +52,8 @@ create_type_name(A,B,C) :-
     atom_concat(AtomA, '_', Atom1),
     atom_concat(Atom1, AtomB, C).
 
-create_contain_rule(BayType, InVal, OutRule) :-
-    atom_string(BayTypeAtom, BayType),
+create_contain_rule(BagType, InVal, OutRule) :-
+    atom_string(BagTypeAtom, BagType),
     length(InVal, Length),
     (
         Length > 4 ->
@@ -62,14 +62,14 @@ create_contain_rule(BayType, InVal, OutRule) :-
         nth0(1, InVal, NumberString),
         number_string(Number, NumberString),
         create_type_name(Name1, Name2, TypeNameAtom),
-        OutRule = contain(BayTypeAtom, TypeNameAtom, bag(TypeNameAtom, Number)),
+        OutRule = contain(BagTypeAtom, TypeNameAtom, bag(TypeNameAtom, Number)),
         assertz(OutRule)
     ;   nth0(1, InVal, Name1),
         nth0(2, InVal, Name2),
         nth0(0, InVal, NumberString),
         number_string(Number, NumberString),
         create_type_name(Name1, Name2, TypeNameAtom),
-        OutRule = contain(BayTypeAtom, TypeNameAtom, bag(TypeNameAtom, Number)),
+        OutRule = contain(BagTypeAtom, TypeNameAtom, bag(TypeNameAtom, Number)),
         assertz(OutRule)
     ).
 
